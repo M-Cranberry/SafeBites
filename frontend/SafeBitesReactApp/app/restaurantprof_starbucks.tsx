@@ -22,16 +22,16 @@ export default function RestProfile() {
 
   // PLACEHOLDER as this will be later be gathered from backend
   const restaurant = {
-    name: "Chick-Fil-A",
-    cuisine: "American fast food",
-    distance: "0.5 mi",
-    rating: 3.5,
-    reviewCount: "100+",
+    name: "Starbucks",
+    cuisine: "American cafe style food",
+    distance: "2.2 mi",
+    rating: 3.6,
+    reviewCount: "300+",
     price: "$",
-    tags: ["Omnivore", "Low-Fat"],
+    tags: ["Dairy-Free", "Vegetarian"],
     about:
-      "American fast-food chain known for its chicken sandwiches and waffle fries.",
-    website: "www.chick-fil-a.com",
+      "Starbucks offers coffee, espresso drinks, teas, pastries, and dairy-free options.",
+    website: "www.starbucks.com",
     phone: "407-000-000",
     address: "000 address, Orlando FL 32000",
     hours: [
@@ -44,9 +44,9 @@ export default function RestProfile() {
       "Sunday: Closed",
     ],
     bestForYou: [
-      { name: "Cobb salad", image: require("../assets/images/cobbsalad.png") },
-      { name: "Cool wrap", image: require("../assets/images/coolwrap.png") },
-      { name: "Fruit cup", image: require("../assets/images/fruitcup.png") },
+      { name: "Vanilla Iced Protein Latte", image: require("../assets/images/vainillaicedproteinlatte.jpg") },
+      { name: "Spinach, Feta & Egg White Wrap", image: require("../assets/images/spinashfetawrap.jpg") },
+      { name: "Potato & Chive Bakes", image: require("../assets/images/potatochivebakes.jpg") },
     ],
     reviews: [
       {
@@ -109,7 +109,7 @@ export default function RestProfile() {
         {/*RESTAURANT IMAGE*/}
         <View style={styles.imageShadow}>
           <Image
-            source={require("../assets/images/chickbanner.jpg")}
+            source={require("../assets/images/starbucks.webp")}
             style={styles.restaurantImage}
             resizeMode="cover"
           />
@@ -145,10 +145,10 @@ export default function RestProfile() {
           <View style={styles.tagsRow}>
             {restaurant.tags.map((tag, index) => {
               // icons for each tag, I used png because svg was too hard to implement here
-              const tagIcon = tag === "Omnivore"
-                ? require("../assets/images/icons/omnivoreicon.png")
-                : tag === "Low-Fat"
-                ? require("../assets/images/icons/lowfaticon.png")
+              const tagIcon = tag === "Dairy-Free"
+                ? require("../assets/images/icons/dairyfreeicon.png")
+                : tag === "Vegetarian"
+                ? require("../assets/images/icons/vegetarianicon.png")
                 : null;
               return (
                 <View key={index} style={styles.tag}>
@@ -389,6 +389,7 @@ const styles = StyleSheet.create({
   },
   bfyItem: {
     alignItems: "center",
+    width: 114,
   },
   bfyShadow: {
     shadowColor: "#C5DBCA",

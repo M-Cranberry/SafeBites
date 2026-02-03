@@ -22,16 +22,16 @@ export default function RestProfile() {
 
   // PLACEHOLDER as this will be later be gathered from backend
   const restaurant = {
-    name: "Chick-Fil-A",
-    cuisine: "American fast food",
-    distance: "0.5 mi",
-    rating: 3.5,
-    reviewCount: "100+",
+    name: "Panda Express",
+    cuisine: "Chinese fast food",
+    distance: "1.1 mi",
+    rating: 4,
+    reviewCount: "200+",
     price: "$",
-    tags: ["Omnivore", "Low-Fat"],
+    tags: ["Low-sugar", "Gluten-Free"],
     about:
-      "American fast-food chain known for its chicken sandwiches and waffle fries.",
-    website: "www.chick-fil-a.com",
+      "Panda Express serves American Chinese dishes like orange chicken and bowls.",
+    website: "www.pandaexpress.com",
     phone: "407-000-000",
     address: "000 address, Orlando FL 32000",
     hours: [
@@ -44,9 +44,9 @@ export default function RestProfile() {
       "Sunday: Closed",
     ],
     bestForYou: [
-      { name: "Cobb salad", image: require("../assets/images/cobbsalad.png") },
-      { name: "Cool wrap", image: require("../assets/images/coolwrap.png") },
-      { name: "Fruit cup", image: require("../assets/images/fruitcup.png") },
+      { name: "Honey Sesame Chicken Bowl", image: require("../assets/images/honeysesamechick.png") },
+      { name: "Build Your Own", image: require("../assets/images/buildown.png") },
+      { name: "Cream Cheese Ragoons", image: require("../assets/images/ragoons.png") },
     ],
     reviews: [
       {
@@ -109,7 +109,7 @@ export default function RestProfile() {
         {/*RESTAURANT IMAGE*/}
         <View style={styles.imageShadow}>
           <Image
-            source={require("../assets/images/chickbanner.jpg")}
+            source={require("../assets/images/pandaexpress.jpg")}
             style={styles.restaurantImage}
             resizeMode="cover"
           />
@@ -145,10 +145,10 @@ export default function RestProfile() {
           <View style={styles.tagsRow}>
             {restaurant.tags.map((tag, index) => {
               // icons for each tag, I used png because svg was too hard to implement here
-              const tagIcon = tag === "Omnivore"
-                ? require("../assets/images/icons/omnivoreicon.png")
-                : tag === "Low-Fat"
-                ? require("../assets/images/icons/lowfaticon.png")
+              const tagIcon = tag === "Low-sugar"
+                ? require("../assets/images/icons/lowsugaricon.png")
+                : tag === "Gluten-Free"
+                ? require("../assets/images/icons/glutenfreeicon.png")
                 : null;
               return (
                 <View key={index} style={styles.tag}>
@@ -389,6 +389,7 @@ const styles = StyleSheet.create({
   },
   bfyItem: {
     alignItems: "center",
+    width: 114,
   },
   bfyShadow: {
     shadowColor: "#C5DBCA",
