@@ -22,16 +22,16 @@ export default function RestProfile() {
 
   // PLACEHOLDER as this will be later be gathered from backend
   const restaurant = {
-    name: "Chick-Fil-A",
-    cuisine: "American fast food",
-    distance: "0.5 mi",
-    rating: 3.5,
-    reviewCount: "100+",
+    name: "Qdoba Mexican",
+    cuisine: "Mexican Food",
+    distance: "0.7 mi",
+    rating: 3.8,
+    reviewCount: "200+",
     price: "$",
-    tags: ["Omnivore", "Low-Fat"],
+    tags: ["Low Sugar", "Gluten-Free"],
     about:
-      "American fast-food chain known for its chicken sandwiches and waffle fries.",
-    website: "www.chick-fil-a.com",
+      "Qdoba serves customizable Mexican food like burritos, bowls, tacos, and quesadillas.",
+    website: "www.qdoba.com",
     phone: "407-000-000",
     address: "000 address, Orlando FL 32000",
     hours: [
@@ -44,9 +44,9 @@ export default function RestProfile() {
       "Sunday: Closed",
     ],
     bestForYou: [
-      { name: "Cobb salad", image: require("../assets/images/cobbsalad.png") },
-      { name: "Cool wrap", image: require("../assets/images/coolwrap.png") },
-      { name: "Fruit cup", image: require("../assets/images/fruitcup.png") },
+      { name: "Chulula bowl", image: require("../assets/images/colulabowl.png") },
+      { name: "Chicken tacos", image: require("../assets/images/chickentaco.png") },
+      { name: "Citrus salad", image: require("../assets/images/citrussalad.png") },
     ],
     reviews: [
       {
@@ -109,7 +109,7 @@ export default function RestProfile() {
         {/*RESTAURANT IMAGE*/}
         <View style={styles.imageShadow}>
           <Image
-            source={require("../assets/images/chickbanner.jpg")}
+            source={require("../assets/images/qdoba.webp")}
             style={styles.restaurantImage}
             resizeMode="cover"
           />
@@ -145,10 +145,10 @@ export default function RestProfile() {
           <View style={styles.tagsRow}>
             {restaurant.tags.map((tag, index) => {
               // icons for each tag, I used png because svg was too hard to implement here
-              const tagIcon = tag === "Omnivore"
-                ? require("../assets/images/icons/omnivoreicon.png")
-                : tag === "Low-Fat"
-                ? require("../assets/images/icons/lowfaticon.png")
+              const tagIcon = tag === "Low Sugar"
+                ? require("../assets/images/icons/lowsugaricon.png")
+                : tag === "Gluten-Free"
+                ? require("../assets/images/icons/glutenfreeicon.png")
                 : null;
               return (
                 <View key={index} style={styles.tag}>

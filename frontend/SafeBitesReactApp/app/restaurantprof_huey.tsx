@@ -22,16 +22,16 @@ export default function RestProfile() {
 
   // PLACEHOLDER as this will be later be gathered from backend
   const restaurant = {
-    name: "Chick-Fil-A",
+    name: "Huey Magoos",
     cuisine: "American fast food",
-    distance: "0.5 mi",
-    rating: 3.5,
-    reviewCount: "100+",
+    distance: "0.7 mi",
+    rating: 3.2,
+    reviewCount: "50+",
     price: "$",
-    tags: ["Omnivore", "Low-Fat"],
+    tags: ["Gluten-Free", "Low-Fat"],
     about:
       "American fast-food chain known for its chicken sandwiches and waffle fries.",
-    website: "www.chick-fil-a.com",
+    website: "www.hueymagoos.com",
     phone: "407-000-000",
     address: "000 address, Orlando FL 32000",
     hours: [
@@ -44,9 +44,9 @@ export default function RestProfile() {
       "Sunday: Closed",
     ],
     bestForYou: [
-      { name: "Cobb salad", image: require("../assets/images/cobbsalad.png") },
-      { name: "Cool wrap", image: require("../assets/images/coolwrap.png") },
-      { name: "Fruit cup", image: require("../assets/images/fruitcup.png") },
+      { name: "Chicken salad", image: require("../assets/images/chickensalad.png") },
+      { name: "Chicken tenders", image: require("../assets/images/chickentenders.jpg") },
+      { name: "Chicken wrap", image: require("../assets/images/chickenwrap.jpg") },
     ],
     reviews: [
       {
@@ -109,7 +109,7 @@ export default function RestProfile() {
         {/*RESTAURANT IMAGE*/}
         <View style={styles.imageShadow}>
           <Image
-            source={require("../assets/images/chickbanner.jpg")}
+            source={require("../assets/images/hueymagoo.jpg")}
             style={styles.restaurantImage}
             resizeMode="cover"
           />
@@ -145,8 +145,8 @@ export default function RestProfile() {
           <View style={styles.tagsRow}>
             {restaurant.tags.map((tag, index) => {
               // icons for each tag, I used png because svg was too hard to implement here
-              const tagIcon = tag === "Omnivore"
-                ? require("../assets/images/icons/omnivoreicon.png")
+              const tagIcon = tag === "Gluten-Free"
+                ? require("../assets/images/icons/glutenfreeicon.png")
                 : tag === "Low-Fat"
                 ? require("../assets/images/icons/lowfaticon.png")
                 : null;
