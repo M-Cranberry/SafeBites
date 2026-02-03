@@ -1,36 +1,50 @@
-import { router } from "expo-router";
-import { Text, View, Pressable, StyleSheet } from "react-native";
+import { router } from "expo-router"; 
+import { Text, View, Pressable, StyleSheet } from "react-native"; 
+
 
 export default function Index() {
   return (
-<View 
-  style={styles.container}>
+    <View style={styles.container}>
+      
+      {/* Header Section */}
       <View style={styles.header}>
-        <Text style={styles.header}>Let’s personalize {"\n"}your dining {"\n"}experience</Text>
-      </View>
-      <View style={styles.body}>
-        <Text style={styles.body}>We’ll ask a few things{"\n"}about your diet and allergies to{"\n"}personalize your{"\n"}recommendations.</Text>
+        <Text style={styles.header}>
+          Let’s personalize {"\n"}your dining {"\n"}experience
+        </Text>
       </View>
 
-        <View style={styles.nextButton}>
-          <Pressable
-            onPress={() => router.push("/screenQ1")}
-          >
-            <Text style={[styles.nextButton, styles.nextButtonBorder]}>     Continue     </Text>
-          </Pressable>
-        </View>
+      {/* Question/Explanation Section */}
+      <View style={styles.body}>
+        <Text style={styles.body}>
+          We’ll ask a few things{"\n"}about your diet and allergies to{"\n"}personalize your{"\n"}recommendations.
+        </Text>
+      </View>
+
+      {/* Continue Button */}
+      <View style={styles.nextButton}>
+        <Pressable onPress={() => router.push("/screenQ1")}>
+          <Text style={[styles.nextButton, styles.nextButtonBorder]}>
+            Continue
+          </Text>
+        </Pressable>
+      </View>
+
     </View>
   );
 }
 
+// Styles 
 const styles = StyleSheet.create({
+  // Container 
   container: {
     flex: 1,
     backgroundColor: '#6AA792',
   },
+
+  // Header 
   header: {
     padding: 20,
-    paddingTop: 60,
+    paddingTop: 50,
     borderWidth: 1,
     borderColor: '#C3D8C5',
     borderBottomLeftRadius: 20,
@@ -40,25 +54,32 @@ const styles = StyleSheet.create({
     fontFamily: 'Quicksand-Medium',
     fontSize: 36,
   },
-    body: {
+
+  // Body
+  body: {
     paddingLeft: 20,
     paddingTop: 40,
     paddingBottom: 40,
     color: '#FFFAF0',
     fontSize: 20,
   },
-    nextButton: {
+
+  // Button Container
+  nextButton: {
     alignContent: 'center',
     justifyContent: 'center',
     alignItems: 'center',
     color: '#FFFAF0',
     fontSize: 20,
-    padding : 15,
+    padding: 15,
   },
-    nextButtonBorder: {
+
+  // Button Colors
+  nextButtonBorder: {
     borderWidth: 2,
     borderColor: '#674F5D',
     borderRadius: 30,
     backgroundColor: '#674F5D',
   },
 });
+
