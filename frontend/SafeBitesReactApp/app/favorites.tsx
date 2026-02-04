@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   discoverTitle: {
     fontSize: 38,
     fontWeight: "600",
-    color: "#8AA197",
+    color: "#719F91",
     paddingBottom: 10,
     marginLeft: 10,
   },
