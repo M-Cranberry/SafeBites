@@ -12,7 +12,7 @@ export default function SignUp() {
 
   const handleSignUp = () => {
     //For Main Dashboard
-  router.push("/screening screens/screening");
+  router.push("/screening");
   };
 
   return (
