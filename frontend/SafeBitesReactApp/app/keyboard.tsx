@@ -12,14 +12,14 @@ export default function AccountInfo() {
         <View style={styles.headerContainer}>
           <Text style={styles.suggest}>Suggestions</Text>
           <Pressable style={styles.editButton} onPress={() => router.push('/main_dashboard')}>
-            <Image 
-              source={require("../assets/images/cancel.png")} 
-              style={styles.editImage} 
+            <Image
+              source={require("../assets/images/cancel.png")}
+              style={styles.editImage}
             />
           </Pressable>
         </View>
 
-       
+
         <View style={styles.body}>
           {[
             "restaurant suggestion 1",
@@ -39,7 +39,7 @@ export default function AccountInfo() {
         </View>
       </View>
 
-      
+
       <View style={styles.searchFloating}>
         <Image
           source={require("../assets/images/search.png")}
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
  editButton: {
-    padding: 5, 
+    padding: 5,
   },
 
   editImage: {
@@ -89,25 +89,25 @@ const styles = StyleSheet.create({
   },
 
   clicky: {
-    flexDirection: "row",      
-    alignItems: "center",      
-    justifyContent: "flex-start",  
-    marginVertical: 10,        
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginVertical: 10,
   },
 
    searchy: {
     width: 20,
     height: 20,
     tintColor: "#674f5d",
-    marginRight: 10,          
+    marginRight: 10,
   },
 
   restSug: {
-    fontSize: 23,            
+    fontSize: 23,
     color: "#674f5d",
     fontFamily: "Quicksand-Regular",
   },
-  
+
    searchFloating: {
   position: "absolute",
   bottom: 90,
