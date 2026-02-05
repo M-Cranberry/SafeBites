@@ -63,7 +63,7 @@ export default function Discover() {
                     style={styles.topIcon}
                 />
             </Pressable>
-           <Pressable onPress={() => router.push("/")}>
+           <Pressable onPress={() => router.push("/filter")}>
                       <Image
                       source={require("../assets/images/filter.png")}
                       style={styles.topIcon}

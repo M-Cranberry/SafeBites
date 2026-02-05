@@ -35,7 +35,7 @@ export default function MainDashboard() {
                     </View>
 
                 </View>
-                <Text style={styles.editPreferences}>{'\n'}edit my preferences</Text>
+                <Text onPress={() => router.push("/dietary_pref")} style={styles.editPreferences}>{'\n'}edit my preferences</Text>
                 </View>
 
 

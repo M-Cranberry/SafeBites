@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import * as React from "react";
 import { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Pressable, Image } from "react-native";
 import { Divider, Provider as PaperProvider, Switch } from "react-native-paper";
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -18,6 +18,7 @@ export default function AccountInfo() {
                 <View style={styles.body}>
                     <Text style={styles.header}>Appearance</Text>
                 </View>
+
 
                 <View style={styles.body}>
                     {/* User Information Section */}
@@ -78,6 +79,30 @@ export default function AccountInfo() {
                     </SafeAreaProvider>
                     <Divider style={{ height: 2, width: 400, backgroundColor: '#C5DBCA' }} />
                 </View>
+                <View style={styles.navBar}>
+                    <Pressable onPress={() => router.push("/main_dashboard")}>
+                                <Image
+                                  source={require("../assets/images/house.png")}
+                                  style={styles.navIcon}
+                                />
+                              </Pressable>
+                      
+                              <Pressable onPress={() => router.push("/Discover")}>
+                                <Image
+                                  source={require("../assets/images/compass.png")}
+                                  style={styles.navIcon}
+                                />
+                              </Pressable>
+                      
+                              <Pressable onPress={() => router.push("/favorites")}>
+                                <Image
+                                  source={require("../assets/images/heart.png")}
+                                  style={styles.navIcon}
+                                />
+                    </Pressable>
+                            
+                </View>
+                
             </View>
         </PaperProvider>
     );
@@ -125,5 +150,18 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingTop: 16,
   },
+ navBar: {
+    flexDirection: "row",
+    justifyContent:"space-evenly",
+    borderTopWidth: 1,
+    borderTopColor: "#FFFAF0",
+    backgroundColor: '#FFFAF0',
+    paddingBottom:30,
+  },
 
+  navIcon: {
+    width: 40,
+    height: 40,
+    tintColor: "#7A9A87",
+  },
 });
