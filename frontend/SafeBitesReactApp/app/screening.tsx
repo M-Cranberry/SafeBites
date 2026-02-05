@@ -1,11 +1,11 @@
-import { router } from "expo-router"; 
-import { Text, View, Pressable, StyleSheet } from "react-native"; 
+import { router } from "expo-router";
+import { Text, View, Pressable, StyleSheet } from "react-native";
 
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      
+
       {/* Header Section */}
       <View style={styles.header}>
         <Text style={styles.header}>
@@ -33,15 +33,15 @@ export default function Index() {
   );
 }
 
-// Styles 
+// Styles
 const styles = StyleSheet.create({
-  // Container 
+  // Container
   container: {
     flex: 1,
     backgroundColor: '#6AA792',
   },
 
-  // Header 
+  // Header
   header: {
     padding: 20,
     paddingTop: 50,
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
     color: '#FFFAF0',
     fontSize: 20,
+    fontFamily: 'Quicksand-Medium',
   },
 
   // Button Container

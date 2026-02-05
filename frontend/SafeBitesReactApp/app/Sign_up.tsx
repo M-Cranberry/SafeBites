@@ -64,7 +64,7 @@ export default function SignUp() {
             <Text style={styles.buttonText}>Sign Up</Text>
           </Pressable>
   </View>
-       
+
       </View>
 
       <View style={styles.bottomText}>
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 23,
     color: "#674f5d",
-    fontFamily: "BBH-Hegarty-Regular",
+    fontFamily: "Quicksand-Medium",
     paddingLeft: 7
   },
 

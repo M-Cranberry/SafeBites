@@ -4,7 +4,9 @@ import { Text, View, Pressable, StyleSheet } from "react-native";
 
 /* whole block manages options being added to an array + option styling and stuff , yes we are going to have to manage strings later*/
 /* Backend phase change variable names*/
-export const allergiesArray = ({ label, value, selectedValues, toggleValue }) => {
+
+//fixed this - Cami (renamed from allergiesArray to Option so JSX can find the component)
+const Option = ({ label, value, selectedValues, toggleValue }) => {
   const checkedQ1 = selectedValues.includes(value);
 
   return (
@@ -104,6 +106,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
     color: "#674F5D",
     fontSize: 20,
+    fontFamily: "Quicksand-Medium"
   },
 
   // Options

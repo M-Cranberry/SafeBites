@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
 
   welcome: {
-    fontSize: 39,
+    fontSize: 36,
     color: "#6aa792",
     fontFamily: "BBHHegarty-Regular",
   },
