@@ -12,6 +12,7 @@ export default function Discover() {
       type: "American fast food",
       distance: "0.5 mi",
       image: require("../assets/images/chickfila.jpg"),
+      route:"/restaurantprof_chickfila",
     },
     {
       id: "2",
@@ -19,6 +20,7 @@ export default function Discover() {
       type: "Mexican food",
       distance: "0.7 mi",
       image: require("../assets/images/qdoba.jpg"),
+      route:"/restaurantprof_qdoba",
     },
     {
       id: "4",
@@ -26,6 +28,7 @@ export default function Discover() {
       type: "Chinese fast food",
       distance: "1.1 mi",
       image: require("../assets/images/panda.jpeg"),
+      route:"/restaurantprof_panda",
     },
     {
       id: "5",
@@ -33,6 +36,7 @@ export default function Discover() {
       type: "American Cafe",
       distance: "2 mi",
       image: require("../assets/images/dunkin.jpg"),
+      route:"/restaurantprof_dunkin",
 
     },
     {
@@ -41,6 +45,7 @@ export default function Discover() {
       type: "Vegan Kitchen",
       distance: "2.6 mi",
       image: require("../assets/images/purple.jpg"),
+      route:"/restaurantprof_purple",
     },
   ];
 
@@ -58,10 +63,12 @@ export default function Discover() {
                     style={styles.topIcon}
                 />
             </Pressable>
-          <Image
-            source={require("../assets/images/filter.png")}
-            style={styles.topIcon}
-          />
+           <Pressable onPress={() => router.push("/")}>
+                      <Image
+                      source={require("../assets/images/filter.png")}
+                      style={styles.topIcon}
+                    />
+            </Pressable>
         </View>
       </View>
 
@@ -86,7 +93,8 @@ export default function Discover() {
   contentContainerStyle={styles.listContent}
 renderItem={({ item }) => (
   <View style={styles.cardShadow}>
-    <Pressable style={styles.card}>
+    <Pressable style={styles.card} 
+     onPress={()=>router.push(item.route as any)}>
       <Image source={item.image} style={styles.cardImage} />
 
       <View style={styles.cardText}>
@@ -110,7 +118,7 @@ renderItem={({ item }) => (
                source={require("../assets/images/search.png")}
                style={styles.searchIcon}
              />
-             <Text style={styles.searchText}>Search</Text>
+             <Text onPress={()=>router.push("/keyboard")} style={styles.searchText}>Search</Text>
            </View>
 
       
@@ -194,10 +202,11 @@ filterRow: {
   },
 
   filterText: {
-    fontSize: 13,
+    fontSize: 15,
     color: "#674f5d",
     fontWeight: "500",
     paddingBottom:12,
+    fontFamily: "Quicksand-SemiBold",
   },
 
   /* grid */
@@ -239,19 +248,22 @@ cardText: {
 restaurantName: {
     fontSize: 20,
     fontWeight: "600",
-    color: "#4A5A5A",
+    color: "#427263",
+    fontFamily: "Quicksand-Bold",
   },
 
   restaurantType: {
     marginTop:10,
     fontSize: 16,
-    color: "#8A9A9A",
+    color: "#427263",
+    fontFamily: "Quicksand-Medium",
   },
 
   distance: {
     marginTop:10,
     fontSize: 15,
-    color: "#8A9A9A",
+    color: "#427263",
+    fontFamily: "Quicksand-Medium",
   },
 
   heartIcon: {
@@ -275,7 +287,7 @@ restaurantName: {
   paddingVertical: 12,
   borderWidth: 3,
   borderColor: "#674f5d",
-  shadowOpacity: 0.9,
+  shadowOpacity:0.9,
   shadowOffset: { width: 7, height: 7 },
   shadowColor: "#674f5d",
 },
@@ -291,6 +303,7 @@ searchIcon: {
 searchText: {
   fontSize: 16,
   color: "#674f5d",
+  fontFamily: "Quicksand-Bold",
 },
 
   navBar: {

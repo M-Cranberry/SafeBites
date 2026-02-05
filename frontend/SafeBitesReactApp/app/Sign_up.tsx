@@ -82,7 +82,7 @@ export default function SignUp() {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#674f5dr",
+    backgroundColor: "#FFF8F3",
     paddingHorizontal: 24,
     paddingTop: 60,
     justifyContent: "space-between",

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   welcome: {
     fontSize: 39,
     color: "#6aa792",
-    fontFamily: "BBH-Hegarty-Regular",
+    fontFamily: "BBHHegarty-Regular",
   },
 
   bottomPanel: {

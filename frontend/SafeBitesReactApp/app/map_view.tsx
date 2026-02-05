@@ -13,14 +13,20 @@ export default function Discover() {
         <Text style={styles.discoverTitle}>Discover</Text>
 
         <View style={styles.iconRow}>
-          <Image
+          <Pressable onPress={() => router.push("/Discover")}>
+            <Image
             source={require("../assets/images/grid.png")}
             style={styles.topIcon}
           />
-          <Image
+          </Pressable>
+          
+          <Pressable onPress={() => router.push("/")}>
+            <Image
             source={require("../assets/images/filter.png")}
             style={styles.topIcon}
           />
+          </Pressable>
+          
         </View>
       </View>
 
@@ -53,7 +59,7 @@ export default function Discover() {
           source={require("../assets/images/search.png")}
           style={styles.searchIcon}
         />
-        <Text style={styles.searchText}>Search</Text>
+        <Text onPress={()=>router.push("/keyboard")} style={styles.searchText}>Search</Text>
       </View>
 
       {/*nav*/}
@@ -103,6 +109,7 @@ discoverTitle: {
   fontWeight: "600",
   color: "#8AA197",
   marginLeft:10,
+  fontFamily: "BBHHagerty-Regular",
 },
 
 iconRow: {
@@ -134,10 +141,11 @@ filterRow: {
   },
 
   filterText: {
-    fontSize: 13,
+    fontSize: 15,
     color: "#674f5d",
     fontWeight: "500",
     paddingBottom:8,
+    fontFamily: "Quicksand-SemiBold",
   },
 
 mapScroll: {
@@ -181,6 +189,7 @@ searchIcon: {
 searchText: {
   fontSize: 16,
   color: "#674f5d",
+  fontFamily: "Quicksand-Bold",
 },
 
 navBar: {
