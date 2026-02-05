@@ -132,6 +132,11 @@ return (
                 </View>
 
             </View>        
+            <View style={styles.bottom}>
+                            <Pressable onPress={()=> router.push('/dietary_pref')}>
+                                <Text style={styles.saveButton}>Save</Text>
+                            </Pressable>
+            </View>
         
         
         </View>
@@ -261,6 +266,22 @@ filterText: {
   fontWeight: "500",
   fontFamily: "Quicksand-Medium",
 },
+bottom: {
+    position: "absolute",
+    bottom: 95,         
+    width: "25%",       
+    alignSelf: "center", 
+    },
 
+    saveButton: {
+    backgroundColor: "#674F5D",
+    color: "#fff",
+    textAlign: "center",
+    paddingVertical: 9,
+    borderRadius: 25,   
+    fontSize: 18,
+    fontWeight: "600",
+    fontFamily: "Quicksand-SemiBold",
+    },
 
 });

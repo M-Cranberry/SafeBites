@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import * as React from "react";
 import { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Pressable, Image } from "react-native";
 import { Divider, Provider as PaperProvider, Switch } from "react-native-paper";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -22,9 +22,9 @@ export default function AccountInfo() {
     <PaperProvider theme={theme}>
       <View style={styles.container}>
 
-        <View style={styles.body}>
-          <Text style={styles.header}>Appearance</Text>
-        </View>
+                <View style={styles.body}>
+                    <Text style={styles.header}>Appearance</Text>
+                </View>
 
         <View style={styles.optionsWrapper}>
           {/* dark mode */}
@@ -103,29 +103,27 @@ export default function AccountInfo() {
           <Divider style={{ height: 2, width: 400, backgroundColor: '#C5DBCA' }} />
         </View>
 
-        <View style={styles.optionsWrapper}>
-          {/* dark mode */}
-          <View style={{ height: 35, paddingLeft: 20, paddingBottom: 50, width: "50%" }}>
-            <Text style={styles.descText}>Share Location </Text>
-          </View>
-
-          <View style={{ height: 35, paddingLeft: 30, paddingTop: 20, paddingBottom: 20, width: "50%" }}>
-            <SafeAreaProvider style={styles.optionsWrapper}>
-              <SafeAreaView style={styles.switchContainer}>
-                    <Switch trackColor={{false: theme.colors.secondary, true: theme.colors.secondary}} 
-                    thumbColor={isEnabled ? theme.colors.secondary : theme.colors.primary} 
-                    ios_backgroundColor="#3e3e3e" 
-                    onValueChange={toggleSwitch} value={isEnabled} />
-              </SafeAreaView>
-            </SafeAreaProvider>
-          </View>
-
-          <Divider style={{ height: 2, width: 400, backgroundColor: '#C5DBCA' }} />
-        </View>
-
-      </View>
-    </PaperProvider>
-  );
+                </View>
+                    <View style={styles.body}>
+                    {/* User Information Section */}
+                    <SafeAreaProvider style={styles.optionsWrapper}>
+                    <Text style={styles.descText}>Share my location
+                        <SafeAreaView style={styles.switchContainer}>
+                            <Switch
+                                trackColor={{false: '#767577', true: '#C5DBCA'}}
+                                thumbColor={isEnabled ? '#FFFAF0' : '#FFFAF0'}
+                                ios_backgroundColor="#3e3e3e"
+                                onValueChange={toggleSwitch}
+                                value={isEnabled}
+                            />
+                        </SafeAreaView>
+                    </Text>
+                    </SafeAreaProvider>
+                    <Divider style={{ height: 2, width: 400, backgroundColor: '#C5DBCA' }} />
+                </View>
+            </View>
+        </PaperProvider>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -179,4 +177,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 8,
   },
+
 });

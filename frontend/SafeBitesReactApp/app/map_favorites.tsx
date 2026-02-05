@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View, Pressable, Image, TextInput, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Pressable, Image, Modal, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
+import DiscoverFilter from "./Discover_filter"; // fixed by cami I imported filter component
 
 export default function Discover() {
   const router = useRouter();
+  const [showFilter, setShowFilter] = useState(false); //state for filter popup added by Cams
 
   return (
     <View style={styles.container}>
@@ -19,11 +21,12 @@ export default function Discover() {
             style={styles.topIcon}
           />
           </Pressable>
-          <Pressable onPress={() => router.push("/")}>
-            <Image
-            source={require("../assets/images/filter.png")}
-            style={styles.topIcon}
-          />
+      
+          <Pressable onPress={() => setShowFilter(true)}>
+                      <Image
+                      source={require("../assets/images/filter.png")}
+                      style={styles.topIcon}
+                    />
           </Pressable>
           
         </View>
@@ -81,6 +84,14 @@ export default function Discover() {
           />
         </Pressable>
       </View>
+       <Modal
+              visible={showFilter}
+              transparent={true}
+              animationType="slide"
+              onRequestClose={() => setShowFilter(false)}
+            >
+              <DiscoverFilter onClose={() => setShowFilter(false)} />
+        </Modal>
 
     </View>
   );

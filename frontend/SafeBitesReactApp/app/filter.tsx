@@ -4,7 +4,7 @@ import { Text,Image, View, StyleSheet, Pressable } from "react-native";
 import { Divider } from "react-native-paper";
 
 
-const Option = ({ label, value, selectedValues, toggleValue }) => {
+const Option = ({ label, value, selectedValues, toggleValue}) => {
   const checkedQ2 = selectedValues.includes(value);
 
   return (
@@ -27,7 +27,7 @@ const Option = ({ label, value, selectedValues, toggleValue }) => {
 };
 
 export default function Q2Answers() {
-  const [selectedValues, setSelectedValues] = React.useState([]);
+  const [selectedValues, setSelectedValues] = React.useState<string[]>([]);
 
   const toggleValue = (item) => {
     setSelectedValues((prev) =>
@@ -40,7 +40,20 @@ export default function Q2Answers() {
 return (
         <View style={styles.container}>
 
-
+            <View style={styles.headerContainer}>
+                <Pressable style={styles.editButton} onPress={()=> router.push('/dietary_pref')}>
+                <Image 
+                source={require("../assets/images/back.png")} 
+                style={styles.editBack} 
+                />
+                </Pressable>
+                <Pressable style={styles.editButton} onPress={()=> router.push('/dietaryPrefEdit')}>
+                <Image 
+                source={require("../assets/images/edit.png")} 
+                style={styles.editImage} 
+                />
+                </Pressable>
+            </View>
 
             <View style={styles.body}>
                 <Text style={styles.header}>Filter{" \n"}</Text>

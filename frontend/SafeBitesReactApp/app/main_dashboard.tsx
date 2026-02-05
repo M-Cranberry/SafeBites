@@ -38,7 +38,7 @@ export default function MainDashboard() {
                     </View>
 
                 </View>
-                <Text style={styles.editPreferences}>{'\n'}edit my preferences</Text>
+                <Text onPress={() => router.push("/dietary_pref")} style={styles.editPreferences}>{'\n'}edit my preferences</Text>
                 </View>
 
 
@@ -115,9 +115,10 @@ export default function MainDashboard() {
                     </View>
                   </View>
 
-
-                <Text onPress={()=>router.push("/Discover")} style={styles.seeMore}>see more</Text>
-
+                  <Pressable onPress={()=>router.push("/Discover")} >
+                      <Text style={styles.seeMore}>see more</Text>
+                  </Pressable>
+                
                 </View>
         </ScrollView>
 
@@ -317,6 +318,7 @@ welcomeRow: {
       width:10,height:10,
     },
     shadowColor:"#A4C4B0",
+    shadowRadius: 0,
   },
   shadowBox:{
   },
