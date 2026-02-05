@@ -47,12 +47,6 @@ return (
                 style={styles.editBack} 
                 />
                 </Pressable>
-                <Pressable style={styles.editButton} onPress={()=> router.push('/dietaryPrefEdit')}>
-                <Image 
-                source={require("../assets/images/edit.png")} 
-                style={styles.editImage} 
-                />
-                </Pressable>
             </View>
 
             <View style={styles.body}>
@@ -87,7 +81,7 @@ return (
                 </View>
 
 
-                <Divider style={{ height: 2, width: 400, backgroundColor: '#C5DBCA' }} />
+                <Divider style={{ height: 2, width: 400, backgroundColor: '#C5DBCA', paddingTop: 10 }} />
 
             </View>
  
@@ -110,17 +104,16 @@ return (
                     <View style={{ height: 35, paddingLeft: 20, width: "50%"}}>
                         <Option label="Pescatarian" value="pescatarian" {...{ selectedValues, toggleValue }} />
                     </View>
-                    <View style={{ height: 35, paddingLeft: 20, width: "50%", paddingBottom: 30 }}>
+                    <View style={{ height: 35, paddingLeft: 20, width: "50%"}}>
                         <Option label="None" value="None" {...{ selectedValues, toggleValue }} />
                     </View>    
                 </View>
                 <View style={styles.body}>
-                    <Divider style={{ height: 2, width: 400, backgroundColor: '#C5DBCA' }} />
+                    <Divider style={{ height: 2, width: 400, backgroundColor: '#C5DBCA', paddingTop: 10 }} />
                 </View>
                 </View>
 <View style={styles.body}>
                 {/* allergies listed options */}
-                <Text style={styles.descText}>Health goals</Text>
                 
                 <View style={styles.filterRow}>
                     {["Manage Weight", "Keto", "Low-Fat"].map((item) => (
@@ -188,15 +181,14 @@ editImage: {
 
   body: {
     paddingLeft: 20,
-    paddingBottom: 10,
-    paddingTop: 10,
+    paddingBottom: 20,
 
   },
    descText: {
     paddingLeft: 20,
     paddingBottom: 15,
     color: '#674F5D',
-    fontFamily: "Quicksand-bold",
+    fontFamily: "Quicksand-Medium",
     fontSize: 20,
   },
     infoText: {
