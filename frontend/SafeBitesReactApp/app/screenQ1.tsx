@@ -2,9 +2,9 @@ import { router } from "expo-router";
 import * as React from "react";
 import { Text, View, Pressable, StyleSheet } from "react-native";
 
-/* manages options being added to an array, yes we are going to have to manage strings later*/
+/* whole block manages options being added to an array + option styling and stuff , yes we are going to have to manage strings later*/
 /* Backend phase change variable names*/
-const Option = ({ label, value, selectedValues, toggleValue }) => {
+export const allergiesArray = ({ label, value, selectedValues, toggleValue }) => {
   const checkedQ1 = selectedValues.includes(value);
 
   return (
@@ -26,9 +26,12 @@ const Option = ({ label, value, selectedValues, toggleValue }) => {
   );
 };
 
+
+/* This specifically is the array*/
 export default function Q1Answers() {
   const [selectedValues, setSelectedValues] = React.useState([]);
 
+  /* manages the values*/
   const toggleValue = (item) => {
     setSelectedValues((prev) =>
       prev.includes(item)

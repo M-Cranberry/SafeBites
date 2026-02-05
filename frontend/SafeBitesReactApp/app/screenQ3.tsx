@@ -26,7 +26,7 @@ const Option = ({ label, value, selectedValues, toggleValue }) => {
   );
 };
 
-export default function Q1Answers() {
+export default function Q3Answers() {
   const [selectedValues, setSelectedValues] = React.useState([]);
 
   const toggleValue = (item) => {
