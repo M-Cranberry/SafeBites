@@ -43,7 +43,7 @@ export default function Q1Answers() {
 
         {/* Next Button */}
        <View style={styles.nextButton}>
-          <Pressable onPress={() => router.push('/index')}>
+          <Pressable onPress={() => router.push("/")}>
             <Text style={[styles.nextButton, styles.nextButtonBorder]}>Logout</Text>
           </Pressable>
         </View>
@@ -141,13 +141,12 @@ const styles = StyleSheet.create({
     alignContent: 'center',
   },
     navBar: {
-    marginBottom: 30,
     flexDirection: "row",
     justifyContent:"space-evenly",
     borderTopWidth: 1,
     borderTopColor: "#FFFAF0",
     backgroundColor: '#FFFAF0',
-    paddingBottom:10,
+    paddingBottom:30,
   },
 
   navIcon: {

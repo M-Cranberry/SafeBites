@@ -9,7 +9,7 @@ export default function AccountInfo() {
         <View style={styles.container}>
 
           <View style={styles.headerContainer}>
-            <Pressable style={styles.editButton} onPress={()=> router.push('/dietary_pref')}>
+            <Pressable style={styles.editButton} onPress={()=> router.push('/account_info')}>
               <Image 
               source={require("../assets/images/back.png")} 
               style={styles.editBack} 
@@ -44,7 +44,7 @@ export default function AccountInfo() {
                 
             </View>
             <View style={styles.bottom}>
-                <Pressable>
+                <Pressable onPress={()=> router.push('/account_info')}>
                     <Text style={styles.saveButton}>Save</Text>
                 </Pressable>
             </View>

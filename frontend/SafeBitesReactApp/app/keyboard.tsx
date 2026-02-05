@@ -47,6 +47,12 @@ export default function AccountInfo() {
         />
         <Text onPress={() => router.push("/keyboard")} style={styles.searchText}>Search</Text>
       </View>
+
+      <View style={styles.key}>
+        <Image source={require("../assets/images/English.png")}
+        style={styles.english}></Image>
+      </View>
+
     </PaperProvider>
   );
 }
@@ -54,7 +60,7 @@ export default function AccountInfo() {
 const styles = StyleSheet.create({
  container: {
     flex: 1,
-    backgroundColor: "#FFFAF0",
+    backgroundColor: "#FFF8F3",
   },
 
   headerContainer: {
@@ -107,10 +113,20 @@ const styles = StyleSheet.create({
     color: "#674f5d",
     fontFamily: "Quicksand-Regular",
   },
+  key:{
+    borderRadius:25,
+    backgroundColor:"#FFF8F3",
 
+  },
+  english:{
+    width:"100%",
+    height:350,
+    borderRadius:30,
+    tintColor:"#FFF8F3",
+  },
    searchFloating: {
   position: "absolute",
-  bottom: 90,
+  bottom: 370,
   alignSelf: "center",
   flexDirection: "row",
   alignItems: "center",
