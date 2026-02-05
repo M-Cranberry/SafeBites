@@ -121,7 +121,6 @@ export default function AccountInfo() {
                     </SafeAreaProvider>
                     <Divider style={{ height: 2, width: 400, backgroundColor: '#C5DBCA' }} />
                 </View>
-            </View>
         </PaperProvider>
     );
 }
