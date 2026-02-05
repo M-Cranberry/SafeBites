@@ -1,9 +1,11 @@
-import { StyleSheet, Text, FlatList, View, Pressable, Image, TextInput, ScrollView } from "react-native";
+import { StyleSheet, Text, FlatList, View, Pressable, Image, Modal, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
+import DiscoverFilter from "./Discover_filter"; //now this goes properly to filter screen cami
 import { useState } from "react";
 
 export default function Discover() {
   const router = useRouter();
+   const [showFilter, setShowFilter] = useState(false);
 
   const restaurants = [
     {
@@ -63,11 +65,11 @@ export default function Discover() {
                     style={styles.topIcon}
                 />
             </Pressable>
-           <Pressable onPress={() => router.push("/filter")}>
-                      <Image
-                      source={require("../assets/images/filter.png")}
-                      style={styles.topIcon}
-                    />
+            <Pressable onPress={() => setShowFilter(true)}>
+              <Image
+              source={require("../assets/images/filter.png")}
+              style={styles.topIcon}
+            />
             </Pressable>
         </View>
       </View>
@@ -144,6 +146,15 @@ renderItem={({ item }) => (
           />
         </Pressable>
       </View>
+      <Modal
+              visible={showFilter}
+              transparent={true}
+              animationType="slide"
+              onRequestClose={() => setShowFilter(false)}
+            >
+              <DiscoverFilter onClose={() => setShowFilter(false)} />
+      </Modal>
+      
 
     </View>
   );

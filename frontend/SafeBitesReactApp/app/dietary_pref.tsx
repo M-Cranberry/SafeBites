@@ -41,7 +41,7 @@ return (
         <View style={styles.container}>
 
             <View style={styles.headerContainer}>
-                <Pressable style={styles.editButton} onPress={()=> router.push('/profile')}>
+                <Pressable style={styles.editButton} onPress={()=> router.push('/main_dashboard')}>
                 <Image 
                 source={require("../assets/images/back.png")} 
                 style={styles.editBack} 
