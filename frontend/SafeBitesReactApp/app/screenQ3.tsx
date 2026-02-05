@@ -1,7 +1,6 @@
 import { router } from "expo-router";
 import * as React from "react";
 import { Text, View, Pressable, StyleSheet } from "react-native";
-import { Checkbox, Provider as PaperProvider } from "react-native-paper";
 
 /* manages options being added to an array, yes we are going to have to manage strings later*/
 /* Backend phase change variable names*/
@@ -9,17 +8,21 @@ const Option = ({ label, value, selectedValues, toggleValue }) => {
   const checkedQ3 = selectedValues.includes(value);
 
   return (
-    <Pressable
-      onPress={() => toggleValue(value)}
-      style={styles.optionContainer}
-    >
-      <Checkbox
-        status={checkedQ3 ? "checked" : "unchecked"}
-        color="#FFFAF0"
-        uncheckedColor="#FFFAF0"
-      />
+    <View style={styles.optionContainer}>
+      {/* Checkbox button */}
+      <Pressable
+        onPress={() => toggleValue(value)}
+        style={[
+          styles.checkbox,
+          checkedQ3 && styles.checkboxChecked,
+        ]}
+      >
+        {checkedQ3 && <View />}
+      </Pressable>
+
+      {/* text or something */}
       <Text style={styles.optionLabel}>{label}</Text>
-    </Pressable>
+    </View>
   );
 };
 
@@ -35,7 +38,6 @@ export default function Q1Answers() {
   };
 
   return (
-    <PaperProvider>
       <View style={styles.container}>
 
         <View style={styles.header}>
@@ -61,7 +63,6 @@ export default function Q1Answers() {
           </Pressable>
         </View>`
       </View>
-    </PaperProvider>
   );
 }
 
@@ -105,6 +106,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 2,
   },
+  optionLabel: {
+    fontSize: 18,
+    color: "#FFFAF0",
+    fontFamily: "Quicksand-Medium",
+  },
+
+    // Custom checkbox
+  checkbox: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: "#FFFAF0",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 10,
+  },
+  checkboxChecked: {
+    backgroundColor: "#C3D8C5",
+    borderColor: "#FFFAF0",
+  },
+
   optionLabel: {
     fontSize: 18,
     color: "#FFFAF0",
