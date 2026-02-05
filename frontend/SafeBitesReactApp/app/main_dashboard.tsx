@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, Pressable, Image, TextInput, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Pressable, Image, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { LinearGradient } from "expo-linear-gradient"; // fixed by cami - added for gradient behind navbar
 
 export default function MainDashboard() {
     const router = useRouter();
     return (
+        <View style={styles.wrapper}>
         <ScrollView contentContainerStyle={styles.container}>
 
                 {/*header*/}
@@ -14,24 +15,26 @@ export default function MainDashboard() {
                     <View style={styles.welcomeName}>
                     <Text style={styles.welcomeText}>Hi, Jane</Text>
                     </View>
-                  
+
                   <Pressable onPress={() => router.push("/profile")}>
                     <Image
                     source={require("../assets/images/profilepic.jpg")}
                     style={styles.profilepic}
                     />
                   </Pressable>
-                    
+
                 </View>
 
                 {/*diet*/}
                 <Text style={styles.dietPreferance}>Your Dietary Preferences</Text>
                 <View style={styles.preferenceRow}>
                     <View style={styles.preferenceBorder}>
-                    <Text style={styles.dietChoice}>🥚 Egg-free</Text>
+                    <Image source={require("../assets/images/icons/eggfreeicon.png")} style={styles.dietIcon} />
+                    <Text style={styles.dietChoice}>Egg-free</Text>
                     </View>
                     <View style={styles.preferenceBorder}>
-                    <Text style={styles.dietChoice}>🐟 Pescetarian</Text>
+                    <Image source={require("../assets/images/icons/pescatarianicon.png")} style={styles.dietIcon} />
+                    <Text style={styles.dietChoice}>Pescatarian</Text>
                     </View>
 
                 </View>
@@ -48,7 +51,7 @@ export default function MainDashboard() {
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={styles.filterRow}>
-                  
+
                   <View style={styles.filterRow}>
                     {["Nearby", "Most popular", "Low price", "Open now"].map((item) => (
                     <View key={item} style={styles.filterButton}>
@@ -57,10 +60,10 @@ export default function MainDashboard() {
                     ))}
                 </View>
                 </ScrollView>
-                
-                 
 
-                  {/*restaurant cards */}                
+
+
+                  {/*restaurant cards */}
                   <View style={styles.shadowBox}>
                     <View style={styles.card}>
                       {[
@@ -107,73 +110,72 @@ export default function MainDashboard() {
                           </View>
                         </View>
                         </Pressable>
-                      
+
                       ))}
                     </View>
                   </View>
 
-              
+
                 <Text onPress={()=>router.push("/Discover")} style={styles.seeMore}>see more</Text>
-
-                <View style = {styles.shadowSearch}>
-                <Pressable  onPress={()=>router.push("/keyboard")} style={styles.searchBar}>
-                  <Image
-                            source={require("../assets/images/search.png")}
-                            style={styles.searchIcon}
-                          />
-                    <Text style={styles.searchText}>Search</Text>
-                </Pressable>
-                </View>
-
-          
-               {/*Nav Bar 
-               Change into actual tabs later*/}
-                <View style={styles.navBar}>
-                <Pressable
-                    style={styles.navItem}
-                    onPress={() => router.push("/main_dashboard")}
-                >
-                    <Image
-                    source={require("../assets/images/house.png")}
-                    style={styles.navIcon}
-                    />
-                </Pressable>
-
-                <Pressable
-                    style={styles.navItem}
-                    onPress={() => router.push("/Discover")}
-                >
-                    <Image
-                    source={require("../assets/images/compass.png")}
-                    style={styles.navIcon}
-                    />
-                </Pressable>
-
-                <Pressable
-                    style={styles.navItem}
-                    onPress={() => router.push("/favorites")}
-                >
-                    <Image
-                    source={require("../assets/images/heart.png")}
-                    style={styles.navIcon}
-                    />
-                </Pressable>
-                </View>
 
                 </View>
         </ScrollView>
+
+        {/* fixed by cami - added gradient behind search bar and navbar */}
+        {/* fixed by cami - gradient white, 0% opacity top to 100% opacity bottom, 278px height */}
+        <LinearGradient
+          colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']}
+          style={styles.bottomGradient}
+        >
+          <Pressable onPress={()=>router.push("/keyboard")} style={styles.searchBar}>
+            <Image
+              source={require("../assets/images/search.png")}
+              style={styles.searchIcon}
+            />
+            <Text style={styles.searchText}>Search</Text>
+          </Pressable>
+
+          <View style={styles.navBar}>
+            <Pressable onPress={() => router.push("/main_dashboard")}>
+                <Image
+                source={require("../assets/images/house.png")}
+                style={styles.navIcon}
+                />
+            </Pressable>
+
+            <Pressable onPress={() => router.push("/Discover")}>
+                <Image
+                source={require("../assets/images/compass.png")}
+                style={styles.navIcon}
+                />
+            </Pressable>
+
+            <Pressable onPress={() => router.push("/favorites")}>
+                <Image
+                source={require("../assets/images/heart.png")}
+                style={styles.navIcon}
+                />
+            </Pressable>
+          </View>
+        </LinearGradient>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
     backgroundColor: "#FFF8F3",
-      flexDirection:"column", 
+  },
+  container: {
+    flexGrow: 1,
+    paddingBottom: 80,
+    backgroundColor: "#FFF8F3",
+    flexDirection:"column",
   },
 
 header: {
-  backgroundColor: "#A4C4B0",
+  backgroundColor: "#C5DBCA",
   borderBottomLeftRadius: 24,
   borderBottomRightRadius: 24,
   paddingHorizontal: 16,
@@ -198,6 +200,8 @@ welcomeRow: {
     fontSize: 30,
     fontWeight: "600",
     color: "#FFF8F3",
+    fontFamily: "BBHHegarty-Regular",
+    marginLeft: -30,
   },
 
   profilepic: {
@@ -224,17 +228,25 @@ welcomeRow: {
     gap: 8,
     paddingHorizontal: 16,
     marginBottom: 2,
-    
+
   },
 
   preferenceBorder: {
+    flexDirection: "row",
     alignItems: "center",
     borderRadius: 18,
     paddingVertical: 6,
     paddingHorizontal: 14,
     borderWidth: 2,
     borderColor: "#674f5d",
-    paddingTop:1,
+    // fixed by cami - removed paddingTop:1 that was cropping the icon
+  },
+
+  dietIcon: {
+    width: 22,  // fixed by cami - increased width to fit icon without cropping
+    height: 18,
+    marginRight: 6,
+    resizeMode: "contain", // fixed by cami - ensures icon fits without cropping
   },
 
   dietChoice: {
@@ -280,7 +292,7 @@ welcomeRow: {
     borderRadius: 18,
     paddingVertical: 6,
     paddingHorizontal: 14,
-    borderWidth: 1.5,
+    borderWidth: 2,
     borderColor: "#674f5d",
   },
 
@@ -346,54 +358,53 @@ cardImage: {
     fontFamily: "Quicksand-Medium",
   },
 
-  shadowSearch:{
-    shadowOpacity:1,
-    shadowOffset: {
-      width:3,height:3,
-    },
-    shadowColor:"#674f5d"
-  },
-
-  /* Search */
+  // fixed by cami - searchBar inside gradient, removed position absolute
   searchBar: {
+    alignSelf: "center",
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 22,
+    backgroundColor: "#FFF8F3",
+    borderRadius: 26,
+    paddingHorizontal: 70,
     paddingVertical: 12,
-    paddingHorizontal: 79,
+    marginBottom: 15,
     borderWidth: 3,
     borderColor: "#674f5d",
-    marginHorizontal: 16,
-    marginBottom: 24,
-    marginRight:110,
-    marginLeft:110,
+    shadowOpacity: 0.9,
+    shadowOffset: { width: 7, height: 7 },
+    shadowColor: "#674f5d",
+    shadowRadius: 0, // fixed by cami - removed blur to make shadow sharp
   },
 
   searchIcon: {
-  width: 18,
-  height: 18,
-  tintColor: "#674f5d",
-  marginRight: 7,
-  fontWeight:"200",
-  marginLeft:-15,
-},
+    width: 18,
+    height: 18,
+    tintColor: "#674f5d",
+    marginRight: 8,
+  },
 
   searchText: {
-    fontSize: 13,
+    fontSize: 16,
     color: "#674f5d",
-    fontFamily: "Quicksand-SemiBold",
+    fontFamily: "Quicksand-Bold",
   },
 
-  /* Bottom Nav (temporary) */
+  // fixed by cami - gradient white, height 278px
+  bottomGradient: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 278,
+    justifyContent: "flex-end",
+    paddingBottom: 20,
+  },
+
+  // fixed by cami - matched navbar style to Discover page
   navBar: {
+    marginBottom: 10,
     flexDirection: "row",
-    justifyContent:"space-evenly",
-    borderTopWidth: 1,
-    borderTopColor: "#FFF8F3",
-  },
-
-  navItem:{
-    padding:-1,
+    justifyContent: "space-evenly",
   },
 
   navIcon: {

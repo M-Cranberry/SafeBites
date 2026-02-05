@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
     color: "#719F91",
     paddingBottom: 10,
     marginLeft: 10,
+    fontFamily: "BBHHegarty-Regular", // fixed by cami - added the font
   },
 
   iconRow: {
@@ -218,7 +219,7 @@ cardShadow: {
   shadowColor: "#A4C4B0",
   shadowOffset: { width: 7, height: 9 },
   shadowOpacity: .9,
-  shadowRadius: 6,
+  shadowRadius: 0, // fixed by cami - made shadow sharp not blurred
   borderRadius: 22,
   marginVertical: 5,
 },
@@ -274,7 +275,7 @@ restaurantName: {
 },
 
 
-  /*search */
+  /*search  - fixed by cami*/
   searchFloating: {
   position: "absolute",
   bottom: 90,
@@ -290,6 +291,7 @@ restaurantName: {
   shadowOpacity:0.9,
   shadowOffset: { width: 7, height: 7 },
   shadowColor: "#674f5d",
+  shadowRadius: 0, // fixed by cami - sharp shadow not blurry
 },
 
 searchIcon: {

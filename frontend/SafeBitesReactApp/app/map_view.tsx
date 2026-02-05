@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View, Pressable, Image, TextInput, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Pressable, Image, ScrollView, Modal } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
+import DiscoverFilter from "./Discover_filter"; // fixed by cami I imported filter component
 
 export default function Discover() {
   const router = useRouter();
+  const [showFilter, setShowFilter] = useState(false); //state for filter popup added by Cams
 
   return (
     <View style={styles.container}>
@@ -19,14 +21,15 @@ export default function Discover() {
             style={styles.topIcon}
           />
           </Pressable>
-          
-          <Pressable onPress={() => router.push("/")}>
+
+          {/*by cami open filter popup overlay instead of navigation */}
+          <Pressable onPress={() => setShowFilter(true)}>
             <Image
             source={require("../assets/images/filter.png")}
             style={styles.topIcon}
           />
           </Pressable>
-          
+
         </View>
       </View>
 
@@ -86,6 +89,16 @@ export default function Discover() {
         </Pressable>
       </View>
 
+      {/* fixed by camfilter popup overlay */}
+      <Modal
+        visible={showFilter}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setShowFilter(false)}
+      >
+        <DiscoverFilter onClose={() => setShowFilter(false)} />
+      </Modal>
+
     </View>
   );
 }
@@ -109,7 +122,7 @@ discoverTitle: {
   fontWeight: "600",
   color: "#8AA197",
   marginLeft:10,
-  fontFamily: "BBHHagerty-Regular",
+  fontFamily: "BBHHegarty-Regular", //corrected font name typo - cami
 },
 
 iconRow: {
@@ -158,7 +171,7 @@ mapImage: {
   width: "100%",
   height: 620,
   borderRadius: 24,
-  
+
 },
 
 searchFloating: {

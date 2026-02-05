@@ -1,9 +1,12 @@
-import { StyleSheet, Text, FlatList, View, Pressable, Image, TextInput, ScrollView } from "react-native";
+import { StyleSheet, Text, FlatList, View, Pressable, Image, ScrollView, Modal } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
+import { LinearGradient } from "expo-linear-gradient"; // added this for the gradient behind by camii
+import DiscoverFilter from "./Discover_filter"; //now this goes properly to filter screen cami
 
 export default function Discover() {
   const router = useRouter();
+  const [showFilter, setShowFilter] = useState(false);
 
   const restaurants = [
     {
@@ -70,13 +73,14 @@ export default function Discover() {
                     style={styles.topIcon}
                 />
             </Pressable>
-          <Pressable onPress={() => router.push("/")}>
+          {/* fixed by cami - open filter popup overlay instead of navigation */}
+          <Pressable onPress={() => setShowFilter(true)}>
             <Image
             source={require("../assets/images/filter.png")}
             style={styles.topIcon}
           />
           </Pressable>
-          
+
         </View>
       </View>
 
@@ -111,36 +115,53 @@ export default function Discover() {
         )}
       />
 
-       <View style={styles.searchFloating}>
-             <Image
-               source={require("../assets/images/search.png")}
-               style={styles.searchIcon}
-             />
-             <Text onPress={()=>router.push("/keyboard")} style={styles.searchText}>Search</Text>
-           </View>
-
-      <View style={styles.navBar}>
-        <Pressable onPress={() => router.push("/main_dashboard")}>
+      {/* fixed by cami - added gradient behind search bar and navbar */}
+      {/* and also gradient white, 0% opacity top to 100% opacity bottom, 278px height */}
+      <LinearGradient
+        colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']}
+        style={styles.bottomGradient}
+      >
+        <Pressable onPress={()=>router.push("/keyboard")} style={styles.searchFloating}>
           <Image
-            source={require("../assets/images/house.png")}
-            style={styles.navIcon}
+            source={require("../assets/images/search.png")}
+            style={styles.searchIcon}
           />
+          <Text style={styles.searchText}>Search</Text>
         </Pressable>
 
-        <Pressable onPress={() => router.push("/Discover")}>
-          <Image
-            source={require("../assets/images/compass.png")}
-            style={styles.navIcon}
-          />
-        </Pressable>
+        <View style={styles.navBar}>
+          <Pressable onPress={() => router.push("/main_dashboard")}>
+            <Image
+              source={require("../assets/images/house.png")}
+              style={styles.navIcon}
+            />
+          </Pressable>
 
-        <Pressable onPress={() => router.push("/favorites")}>
-          <Image
-            source={require("../assets/images/heart.png")}
-            style={styles.navIcon}
-          />
-        </Pressable>
-      </View>
+          <Pressable onPress={() => router.push("/Discover")}>
+            <Image
+              source={require("../assets/images/compass.png")}
+              style={styles.navIcon}
+            />
+          </Pressable>
+
+          <Pressable onPress={() => router.push("/favorites")}>
+            <Image
+              source={require("../assets/images/heart.png")}
+              style={styles.navIcon}
+            />
+          </Pressable>
+        </View>
+      </LinearGradient>
+
+      {/*fixed by cami filter popup overlay */}
+      <Modal
+        visible={showFilter}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setShowFilter(false)}
+      >
+        <DiscoverFilter onClose={() => setShowFilter(false)} />
+      </Modal>
 
     </View>
   );
@@ -166,6 +187,7 @@ const styles = StyleSheet.create({
     color: "#719F91",
     paddingBottom: 10,
     marginLeft: 10,
+    fontFamily: "BBHHegarty-Regular",
   },
 
   iconRow: {
@@ -218,8 +240,9 @@ const styles = StyleSheet.create({
     margin: 8,
     flex: 1,
     shadowOpacity: 0.9,
-  shadowOffset: { width: 7, height: 7 },
-  shadowColor: "#6aa792",
+    shadowOffset: { width: 7, height: 7 },
+    shadowColor: "#6aa792",
+    shadowRadius: 0, //removed blur to make shadow sharp fixed by cams
   },
 
   cardImage: {
@@ -251,44 +274,51 @@ const styles = StyleSheet.create({
 
   },
 
-  /*search */
+  // gradient white, height 278px as figma prot cami changed this
+  bottomGradient: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 278,
+    justifyContent: "flex-end",
+    paddingBottom: 20,
+  },
+
   searchFloating: {
-  position: "absolute",
-  bottom: 90,
-  alignSelf: "center",
-  flexDirection: "row",
-  alignItems: "center",
-  backgroundColor: "#FFF8F3",
-  borderRadius: 26,
-  paddingHorizontal: 70,
-  paddingVertical: 12,
-  borderWidth: 3,
-  borderColor: "#674f5d",
-  shadowOpacity: 0.9,
-  shadowOffset: { width: 7, height: 7 },
-  shadowColor: "#674f5d",
-},
+    alignSelf: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFF8F3",
+    borderRadius: 26,
+    paddingHorizontal: 70,
+    paddingVertical: 12,
+    marginBottom: 15,
+    borderWidth: 3,
+    borderColor: "#674f5d",
+    shadowOpacity: 0.9,
+    shadowOffset: { width: 7, height: 7 },
+    shadowColor: "#674f5d",
+    shadowRadius: 0, // again removed blur to make shadow sharp
+  },
 
-searchIcon: {
-  width: 18,
-  height: 18,
-  tintColor: "#674f5d",
-  marginRight: 8,
-  fontWeight:"200",
-},
+  searchIcon: {
+    width: 18,
+    height: 18,
+    tintColor: "#674f5d",
+    marginRight: 8,
+  },
 
-searchText: {
-  fontSize: 16,
-  color: "#674f5d",
-  fontFamily: "Quicksand-Bold",
-},
+  searchText: {
+    fontSize: 16,
+    color: "#674f5d",
+    fontFamily: "Quicksand-Bold",
+  },
 
   navBar: {
-    marginBottom: 30,
+    marginBottom: 10,
     flexDirection: "row",
-    justifyContent:"space-evenly",
-    borderTopWidth: 1,
-    borderTopColor: "#FFF8F3",
+    justifyContent: "space-evenly",
   },
 
   navIcon: {

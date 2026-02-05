@@ -41,7 +41,7 @@ return (
         <View style={styles.container}>
 
             <View style={styles.headerContainer}>
-                <Pressable style={styles.editButton} onPress={()=> router.push('/main_dashboard')}>
+                <Pressable style={styles.editButton} onPress={()=> router.push('/dietary_pref')}>
                 <Image 
                 source={require("../assets/images/back.png")} 
                 style={styles.editBack} 
@@ -56,7 +56,7 @@ return (
             </View>
 
             <View style={styles.body}>
-                <Text style={styles.header}>Dietary{" \n"}Preferences</Text>
+                <Text style={styles.header}>Filter{" \n"}</Text>
             </View>
             <View style={styles.body}>
                 {/* allergies listed options */}
@@ -150,13 +150,13 @@ return (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFAF0",
+    backgroundColor: "#6aa792",
   },
     header: {
     marginTop:10,
     paddingLeft: 20,
     fontSize: 36,
-    color: "#6aa792",
+    color: "#FFFAF0",
     paddingBottom: 13,
     fontFamily: "BBH Sans Hegarty",
     fontWeight: "regular",
@@ -178,12 +178,12 @@ editButton: {
 editBack: {
  width:28,
 height:28,
-tintColor:"#674F5D",
+tintColor:"#FFFAF0",
 },
 editImage: {
   width: 35,
   height: 35,
-  tintColor:"#674F5D",
+  tintColor:"#FFFAF0",
 },
 
   body: {
@@ -195,7 +195,7 @@ editImage: {
    descText: {
     paddingLeft: 20,
     paddingBottom: 15,
-    color: '#674F5D',
+    color: '#FFFAF0',
     fontFamily: "Quicksand-bold",
     fontSize: 20,
   },
@@ -213,19 +213,19 @@ editImage: {
     height: 24,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: "#674F5D",
+    borderColor: "#FFFAF0",
     alignItems: "center",
     justifyContent: "center",
     marginRight: 10,
   },
   checkboxChecked: {
-    backgroundColor: "#674F5D",
-    borderColor: "#674F5D",
+    backgroundColor: "#FFFAF0",
+    borderColor: "#FFFAF0",
   },
 
   optionLabel: {
     fontSize: 18,
-    color: "#674F5D",
+    color: "#FFFAF0",
     fontFamily: "Quicksand-Medium",
   },
 
@@ -260,12 +260,12 @@ filterButton: {
   paddingVertical: 6,
   paddingHorizontal: 14,
   borderWidth: 2,
-  borderColor: "#674f5d",
+  borderColor: "#FFFAF0",
 },
 
 filterText: {
   fontSize: 13,
-  color: "#674f5d",
+  color: "#FFFAF0",
   fontWeight: "500",
   fontFamily: "Quicksand-Medium",
 },

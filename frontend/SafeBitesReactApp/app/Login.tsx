@@ -7,7 +7,7 @@ export default function Login() {
 
   const [Username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  
+
 
   const handleLogin = () => {
     router.push("/main_dashboard");
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: "#674f5d",
-    fontFamily: "BBH-Hegarty-Regular",
+    fontFamily: "Quicksand-Medium",
     paddingLeft: 7
   },
 
@@ -123,13 +123,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10,
     alignSelf: "center",
-    width: "60%"
+    width: "60%",
+    fontFamily: "Quicksand-Medium",
   },
 
   buttonText: {
     color: "#FFF8F3",
     fontSize: 20,
-    fontFamily: "Quicksand-Regular",
+    fontFamily: "Quicksand-Medium",
   },
 
   bottomText: {
