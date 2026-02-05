@@ -14,11 +14,14 @@ export default function MainDashboard() {
                     <View style={styles.welcomeName}>
                     <Text style={styles.welcomeText}>Hi, Jane</Text>
                     </View>
-
+                  
+                  <Pressable onPress={() => router.push("/profile")}>
                     <Image
                     source={require("../assets/images/profilepic.jpg")}
                     style={styles.profilepic}
                     />
+                  </Pressable>
+                    
                 </View>
 
                 {/*diet*/}
@@ -65,48 +68,55 @@ export default function MainDashboard() {
                           name: "Chick-Fil-A",
                           distance: "0.5 mi",
                           image: require("../assets/images/chickfila.jpg"),
+                          route:"/restaurantprof_chickfila",
                         },
                         {
                           name: "Qdoba Mexican",
                           distance: "0.7 mi",
                           image: require("../assets/images/qdoba.jpg"),
+                          route:"/restaurantprof_qdoba",
                         },
                         {
                           name: "Huey Magoos",
                           distance: "0.7 mi",
                           image: require("../assets/images/huey.jpg"),
+                          route:"/restaurantprof_huey",
                         },
                         /*
                         {
                           name: "Panda Express",
                           distance: "1.1 mi",
                           image: require("../assets/images/panda.jpg"),
+                          route:"/restaurantprof_panda",
                         },
                         {
                           name: "Dunkin Donuts",
                           distance: "2 mi",
                           image: require("../assets/images/dunkin.jpg"),
+                          route:"/restaurantprof_dunkin",
                         }
                         */
                       ].map((item) => (
-                        <View key={item.name} style={styles.cardRow}>
+                        <Pressable onPress={()=>router.push(item.route as any)}
+                         key={item.name} >
+                          <View style={styles.cardRow}>
                           <Image source={item.image} style={styles.cardImage} />
                           <View>
-                            <Text style={styles.restaurantName}>{item.name}</Text>
+                            <Text  style={styles.restaurantName}>{item.name}</Text>
                             <Text style={styles.distance}>{item.distance}</Text>
                           </View>
                         </View>
+                        </Pressable>
+                      
                       ))}
                     </View>
                   </View>
 
-                
-
-                
-                <Text style={styles.seeMore}>see more</Text>
+              
+                <Text onPress={()=>router.push("/Discover")} style={styles.seeMore}>see more</Text>
 
                 <View style = {styles.shadowSearch}>
-                <Pressable style={styles.searchBar}>
+                <Pressable  onPress={()=>router.push("/keyboard")} style={styles.searchBar}>
                   <Image
                             source={require("../assets/images/search.png")}
                             style={styles.searchIcon}
@@ -200,11 +210,12 @@ welcomeRow: {
   /* Dietary Preferences */
   dietPreferance: {
     marginTop: 20,
-    fontSize: 26,
+    fontSize: 25,
     color: "#674f5d",
     marginBottom: 15,
-    fontWeight: "500",
+    fontWeight: "400",
     paddingHorizontal: 16,
+    fontFamily: "Quicksand-Bold",
   },
 
   preferenceRow: {
@@ -213,6 +224,7 @@ welcomeRow: {
     gap: 8,
     paddingHorizontal: 16,
     marginBottom: 2,
+    
   },
 
   preferenceBorder: {
@@ -220,14 +232,16 @@ welcomeRow: {
     borderRadius: 18,
     paddingVertical: 6,
     paddingHorizontal: 14,
-    borderWidth: 1.5,
+    borderWidth: 2,
     borderColor: "#674f5d",
+    paddingTop:1,
   },
 
   dietChoice: {
-    fontSize: 17,
+    fontSize: 15,
     color: "#674f5d",
-    fontWeight: "500",
+    fontWeight: "300",
+    fontFamily: "Quicksand-SemiBold",
   },
 
   editPreferences: {
@@ -236,6 +250,7 @@ welcomeRow: {
     textAlign: "center",
     marginTop: -5,
     marginBottom: -10,
+    fontFamily: "Quicksand-Medium",
   },
 
   middleContainer:{
@@ -248,7 +263,8 @@ welcomeRow: {
     marginBottom: 12,
     fontWeight: "500",
     paddingHorizontal: 16,
-    marginLeft:7,
+    marginLeft:10,
+    fontFamily: "Quicksand-Bold",
   },
 
   filterRow: {
@@ -257,6 +273,7 @@ welcomeRow: {
     gap: 8,
     paddingHorizontal: 16,
     marginBottom: 12,
+    marginLeft:-3,
   },
 
   filterButton: {
@@ -271,6 +288,7 @@ welcomeRow: {
     fontSize: 13,
     color: "#674f5d",
     fontWeight: "500",
+    fontFamily: "Quicksand-Medium",
   },
 
   /* Restaurant Cards */
@@ -310,11 +328,13 @@ cardImage: {
     fontSize: 15,
     fontWeight: "600",
     color: "#427263",
+    fontFamily: "Quicksand-Bold",
   },
 
   distance: {
     fontSize: 13,
     color: "#8A9A9A",
+    fontFamily: "Quicksand-Medium",
   },
 
   seeMore: {
@@ -323,6 +343,7 @@ cardImage: {
     textAlign: "center",
     marginBottom: 30,
     paddingTop: 9,
+    fontFamily: "Quicksand-Medium",
   },
 
   shadowSearch:{
@@ -358,8 +379,9 @@ cardImage: {
 },
 
   searchText: {
-    fontSize: 14,
+    fontSize: 13,
     color: "#674f5d",
+    fontFamily: "Quicksand-SemiBold",
   },
 
   /* Bottom Nav (temporary) */

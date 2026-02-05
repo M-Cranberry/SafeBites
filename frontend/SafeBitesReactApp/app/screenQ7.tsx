@@ -23,7 +23,7 @@ export default function Q1Answers() {
 
         {/* Next Button */}
 `       <View style={styles.nextButton}>
-          <Pressable onPress={() => router.push('/profile')}>
+          <Pressable onPress={() => router.push('/main_dashboard')}>
             <Text style={[styles.nextButton, styles.nextButtonBorder]}> Go to Main Dashboard </Text>
           </Pressable>
         </View>`

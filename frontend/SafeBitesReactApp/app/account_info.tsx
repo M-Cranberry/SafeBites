@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text,Image, View, StyleSheet, Pressable } from "react-native";
 import { Divider, Provider as PaperProvider } from "react-native-paper";
 
 export default function AccountInfo() {
@@ -8,10 +8,23 @@ export default function AccountInfo() {
     <PaperProvider>
         <View style={styles.container}>
 
+          <View style={styles.headerContainer}>
+            <Pressable style={styles.editButton} onPress={()=> router.push('/dietary_pref')}>
+              <Image 
+              source={require("../assets/images/back.png")} 
+              style={styles.editBack} 
+              />
+            </Pressable>
+            <Pressable style={styles.editButton} onPress={()=> router.push('/account_edit')}>
+              <Image 
+              source={require("../assets/images/edit.png")} 
+              style={styles.editImage} 
+              />
+            </Pressable>
+          </View>
             <View style={styles.body}>
                 <Text style={styles.header}>Account{" \n"}Information</Text>
             </View>
-
             <View style={styles.body}>
                 {/* User Information Section */}
                 <Text style={styles.descText}>Name</Text>
@@ -41,14 +54,39 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFAF0",
   },
     header: {
+    marginTop:10,
     paddingLeft: 20,
     fontSize: 36,
-    fontWeight: "600",
-    color: "#719F91",
-    paddingBottom: 10,
+    color: "#6aa792",
+    paddingBottom: 13,
     fontFamily: "BBH Sans Hegarty",
     fontWeight: "regular",
   },
+
+headerContainer: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  paddingLeft: 35,
+  paddingRight: 20,
+  paddingBottom: 10,
+},
+
+editButton: {
+  padding: 5, 
+},
+
+editBack: {
+ width:28,
+height:28,
+tintColor:"#674F5D",
+},
+editImage: {
+  width: 35,
+  height: 35,
+  tintColor:"#674F5D",
+},
+
   body: {
     paddingLeft: 20,
     paddingBottom: 20,

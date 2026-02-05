@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
     header: {
         paddingLeft: 20,
         fontSize: 36,
-        fontWeight: "600",
         color: "#719F91",
         paddingBottom: 10,
         fontFamily: "BBH Sans Hegarty",

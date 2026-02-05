@@ -21,8 +21,8 @@ export default function Q1Answers() {
                 />
         </View>
 
-    `   <View style={styles.navigation}>
-            <Pressable onPress={() => router.push('/deitary_Pref')}> 
+       <View style={styles.navigation}>
+            <Pressable onPress={() => router.push('/dietary_pref')}> 
                 <Text style={styles.descText}>Dietary Preferences &gt;</Text>
             </Pressable>
         </View>
@@ -42,7 +42,7 @@ export default function Q1Answers() {
         {/* <View><Text>{" \n"}</Text></View> */}
 
         {/* Next Button */}
-`       <View style={styles.nextButton}>
+       <View style={styles.nextButton}>
           <Pressable onPress={() => router.push('/index')}>
             <Text style={[styles.nextButton, styles.nextButtonBorder]}>Logout</Text>
           </Pressable>
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
   }, 
     header: {
     fontSize: 36,
-    fontWeight: "600",
     color: "#719F91",
     paddingBottom: 10,
     marginLeft: 10,

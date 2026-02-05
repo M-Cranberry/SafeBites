@@ -12,6 +12,7 @@ export default function Discover() {
       type: "American fast food",
       distance: "0.5 mi",
       image: require("../assets/images/chickfila.jpg"),
+      route:"/restaurantprof_chickfila",
     },
     {
       id: "2",
@@ -19,6 +20,7 @@ export default function Discover() {
       type: "Mexican food",
       distance: "0.7 mi",
       image: require("../assets/images/qdoba.jpg"),
+      route:"/restaurantprof_qdoba",
     },
     {
       id: "3",
@@ -26,6 +28,7 @@ export default function Discover() {
       type: "American fast food",
       distance: "0.7 mi",
       image: require("../assets/images/huey.jpg"),
+      route:"/restaurantprof_huey",
     },
     {
       id: "4",
@@ -33,6 +36,7 @@ export default function Discover() {
       type: "Chinese fast food",
       distance: "1.1 mi",
       image: require("../assets/images/panda.jpeg"),
+      route:"/restaurantprof_panda",
     },
     {
       id: "5",
@@ -40,6 +44,7 @@ export default function Discover() {
       type: "American Cafe",
       distance: "2 mi",
       image: require("../assets/images/dunkin.jpg"),
+      route:"/restaurantprof_dunkin",
 
     },
     {
@@ -48,6 +53,7 @@ export default function Discover() {
       type: "Vegan Kitchen",
       distance: "2.6 mi",
       image: require("../assets/images/purple.jpg"),
+      route:"/restaurantprof_purple",
     },
   ];
 
@@ -64,10 +70,13 @@ export default function Discover() {
                     style={styles.topIcon}
                 />
             </Pressable>
-          <Image
+          <Pressable onPress={() => router.push("/")}>
+            <Image
             source={require("../assets/images/filter.png")}
             style={styles.topIcon}
           />
+          </Pressable>
+          
         </View>
       </View>
 
@@ -92,7 +101,7 @@ export default function Discover() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
         renderItem={({ item }) => (
-          <Pressable style={styles.card}>
+          <Pressable style={styles.card} onPress={()=>router.push(item.route as any)}>
             <Image source={item.image} style={styles.cardImage} />
 
             <Text style={styles.restaurantName}>{item.name}</Text>
@@ -107,7 +116,7 @@ export default function Discover() {
                source={require("../assets/images/search.png")}
                style={styles.searchIcon}
              />
-             <Text style={styles.searchText}>Search</Text>
+             <Text onPress={()=>router.push("/keyboard")} style={styles.searchText}>Search</Text>
            </View>
 
       <View style={styles.navBar}>
@@ -191,7 +200,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#674f5d",
     fontWeight: "500",
-    paddingBottom:7,
+    paddingBottom:12,
+    fontFamily: "Quicksand-Medium",
   },
 
   listContent: {
@@ -202,34 +212,43 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#FFF8F3",
     borderRadius: 22,
-    borderWidth: 1.5,
-    borderColor: "#A4C4B0",
-    padding: 10,
+    borderWidth: 2,
+    borderColor: "#6aa792",
+    padding: 9.5,
     margin: 8,
     flex: 1,
+    shadowOpacity: 0.9,
+  shadowOffset: { width: 7, height: 7 },
+  shadowColor: "#6aa792",
   },
 
   cardImage: {
     width: "100%",
     height: 110,
     borderRadius: 16,
-    marginBottom: 8,
+    marginBottom: 9,
   },
 
   restaurantName: {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: "600",
     color: "#4A5A5A",
+    fontFamily: "Quicksand-Bold",
+    marginBottom:4,
   },
 
   restaurantType: {
-    fontSize: 13,
+    fontSize: 17,
     color: "#8A9A9A",
+    fontFamily: "Quicksand-SemiBold",
+    marginBottom:4,
   },
 
   distance: {
-    fontSize: 13,
+    fontSize: 15,
     color: "#8A9A9A",
+    fontFamily: "Quicksand-SemiBold",
+
   },
 
   /*search */
@@ -261,6 +280,7 @@ searchIcon: {
 searchText: {
   fontSize: 16,
   color: "#674f5d",
+  fontFamily: "Quicksand-Bold",
 },
 
   navBar: {
