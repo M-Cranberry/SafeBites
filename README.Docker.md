@@ -1,4 +1,6 @@
 ### Building and running your application
+File pointer?
+./frontend/SafeBitesReactApp/app/login.tsx
 
 When you're ready, start your application by running:
 `docker compose up --build`.
