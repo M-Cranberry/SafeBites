@@ -1,9 +1,15 @@
-
+require('dotenv').config({ path: 'configA.env' });
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://Megan:fish@cluster0.zadfioy.mongodb.net/?appName=Cluster0";
+
+
+const connectionString = process.env.MONGO_URI;
+
+if (!connectionString) {
+  throw new Error("MongoDB connection string is not defined in .env");
+}
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
+const client = new MongoClient(connectionString, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
