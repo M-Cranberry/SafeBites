@@ -1,5 +1,5 @@
-require('dotenv').config({ path: 'config.env' });
 const { MongoClient, ServerApiVersion } = require('mongodb');
+require('dotenv').config({ path: 'config.env' });
 
 const connectionString = process.env.MONGO_URI;
 
