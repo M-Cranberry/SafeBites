@@ -43,4 +43,5 @@ app-example
 /android
 
 #env
-config.env
+SafeBites/backend/server/config.env
+backend/server/config.env
