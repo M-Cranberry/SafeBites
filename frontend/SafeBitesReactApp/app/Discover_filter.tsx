@@ -3,48 +3,72 @@
 import { StyleSheet, Text, View, Pressable, ScrollView } from "react-native";
 import * as React from "react";
 import Slider from "@react-native-community/slider";
+import { useUserPreferences } from "../context/UserPreferenceContext";
 
-// this is so the parent component can close the popup
 interface FilterProps {
   onClose: () => void;
 }
 
 export default function DiscoverFilter({ onClose }: FilterProps) {
 
-  //states for all the filter options
+  const { preferences, updateManyPreferences } = useUserPreferences();
+
+  // distance stays local to filter
   const [distance, setDistance] = React.useState(2);
+
+  // SAME STRUCTURE as DietaryPref screen
   const [selectedAllergies, setSelectedAllergies] = React.useState<string[]>([]);
-  const [selectedDiet, setSelectedDiet] = React.useState("None");
-  const [selectedGoals, setSelectedGoals] = React.useState<string[]>([]);
+  const [selectedDietType, setSelectedDietType] = React.useState<string[]>([]);
+  const [selectedHealthGoals, setSelectedHealthGoals] = React.useState<string[]>([]);
 
-  // toggle function for allergies adds or removes from array, maybe these can be added in the other ones but I dont have time to do that - Cami
+  // preload saved preferences when popup opens
+  React.useEffect(() => {
+    setSelectedAllergies(preferences.allergies ?? []);
+    setSelectedDietType(preferences.dietType ?? []);
+    setSelectedHealthGoals(preferences.dietPlan ?? []);
+  }, [preferences]);
+
+  // toggles
   const toggleAllergy = (item: string) => {
-    if (selectedAllergies.includes(item)) {
-
-      setSelectedAllergies(selectedAllergies.filter((a) => a !== item));
-    } else {
-      setSelectedAllergies([...selectedAllergies, item]);
-    }
+    setSelectedAllergies((prev) =>
+      prev.includes(item)
+        ? prev.filter((v) => v !== item)
+        : [...prev, item]
+    );
   };
 
-  //same thing but for health goals
-  const toggleGoal = (item: string) => {
-    if (selectedGoals.includes(item)) {
-      setSelectedGoals(selectedGoals.filter((g) => g !== item));
-    } else {
-      setSelectedGoals([...selectedGoals, item]);
-    }
+  const toggleDietType = (item: string) => {
+    setSelectedDietType((prev) =>
+      prev.includes(item)
+        ? prev.filter((v) => v !== item)
+        : [...prev, item]
+    );
+  };
+
+  const toggleHealthGoal = (item: string) => {
+    setSelectedHealthGoals((prev) =>
+      prev.includes(item)
+        ? prev.filter((v) => v !== item)
+        : [...prev, item]
+    );
+  };
+
+  const handleSave = () => {
+    updateManyPreferences({
+      allergies: selectedAllergies,
+      dietType: selectedDietType,
+      dietPlan: selectedHealthGoals,
+    });
+
+    onClose();
   };
 
   return (
     <View style={styles.overlay}>
-      {/*this is the dark background behind the popup, click to close */}
       <Pressable style={styles.darkBackground} onPress={onClose} />
 
-      {/*main popup container */}
       <View style={styles.popupContainer}>
-
-        {/* header with title and X button*/}
+        {/* Header */}
         <View style={styles.headerRow}>
           <Text style={styles.filterTitle}>Filter</Text>
           <Pressable onPress={onClose}>
@@ -54,7 +78,7 @@ export default function DiscoverFilter({ onClose }: FilterProps) {
 
         <ScrollView showsVerticalScrollIndicator={false}>
 
-          {/*  distance section */}
+          {/* Distance */}
           <View style={styles.section}>
             <Text style={styles.sectionLabel}>Distance</Text>
             <Text style={styles.distanceText}>{distance}mi</Text>
@@ -72,166 +96,112 @@ export default function DiscoverFilter({ onClose }: FilterProps) {
             <View style={styles.line} />
           </View>
 
-          {/* allergies section - first row */}
+          {/* Allergies */}
           <View style={styles.section}>
             <Text style={styles.sectionLabel}>Allergies</Text>
+
+            {[
+              ["dairy", "eggs", "gluten", "peanuts"],
+              ["treenuts", "soy", "wheat", "fish"],
+              ["shellfish", "sesame"],
+            ].map((row, index) => (
+              <View key={index} style={styles.chipsRow}>
+                {row.map((item) => (
+                  <Pressable
+                    key={item}
+                    style={[
+                      styles.chip,
+                      selectedAllergies.includes(item) && styles.chipSelected
+                    ]}
+                    onPress={() => toggleAllergy(item)}
+                  >
+                    <Text style={[
+                      styles.chipText,
+                      selectedAllergies.includes(item) && styles.chipTextSelected
+                    ]}>
+                      {item.charAt(0).toUpperCase() + item.slice(1)}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+            ))}
+
+            <View style={styles.line} />
+          </View>
+
+          {/* Diet Type */}
+          <View style={styles.section}>
+            <Text style={styles.sectionLabel}>Diet Type</Text>
             <View style={styles.chipsRow}>
-              {["Dairy", "Eggs", "Gluten", "Peanuts"].map((item) => (
+              {[
+                { label: "Omnivore", value: "omnivore" },
+                { label: "Vegetarian", value: "vegetarian" },
+                { label: "Vegan", value: "vegan" },
+                { label: "Pescatarian", value: "pescatarian" },
+                { label: "None", value: "none" },
+              ].map(({ label, value }) => (
                 <Pressable
-                  key={item}
+                  key={value}
                   style={[
                     styles.chip,
-                    selectedAllergies.includes(item) && styles.chipSelected
+                    selectedDietType.includes(value) && styles.chipSelected
                   ]}
-                  onPress={() => toggleAllergy(item)}
+                  onPress={() => toggleDietType(value)}
                 >
                   <Text style={[
                     styles.chipText,
-                    selectedAllergies.includes(item) && styles.chipTextSelected
-                  ]}>{item}</Text>
-                </Pressable>
-              ))}
-            </View>
-            {/* second row of allergies*/}
-            <View style={styles.chipsRow}>
-              {["Tree nuts", "Soy", "Wheat", "Fish"].map((item) => (
-                <Pressable
-                  key={item}
-                  style={[
-                    styles.chip,
-                    selectedAllergies.includes(item) && styles.chipSelected
-                  ]}
-                  onPress={() => toggleAllergy(item)}
-                >
-                  <Text style={[
-                    styles.chipText,
-                    selectedAllergies.includes(item) && styles.chipTextSelected
-                  ]}>{item}</Text>
-                </Pressable>
-              ))}
-            </View>
-            {/*third row */}
-            <View style={styles.chipsRow}>
-              {["Shellfish", "Sesame", "Add custom"].map((item) => (
-                <Pressable
-                  key={item}
-                  style={[
-                    styles.chip,
-                    selectedAllergies.includes(item) && styles.chipSelected
-                  ]}
-                  onPress={() => toggleAllergy(item)}
-                >
-                  <Text style={[
-                    styles.chipText,
-                    selectedAllergies.includes(item) && styles.chipTextSelected
-                  ]}>{item}</Text>
+                    selectedDietType.includes(value) && styles.chipTextSelected
+                  ]}>
+                    {label}
+                  </Text>
                 </Pressable>
               ))}
             </View>
             <View style={styles.line} />
           </View>
 
-          {/*diet type sectioncheckboxes so only one can be selected*/}
+          {/* Health Goals */}
           <View style={styles.section}>
-            <Text style={styles.sectionLabel}>Diet Type</Text>
-            <View style={styles.radioGrid}>
-              {/* row 1 */}
-              <View style={styles.radioItem}>
-                <Pressable
-                  style={styles.radioCircle}
-                  onPress={() => setSelectedDiet("Omnivore")}
-                >
-                  {selectedDiet === "Omnivore" && <View style={styles.radioFilled} />}
-                </Pressable>
-                <Text style={styles.radioLabel}>Omnivore</Text>
-              </View>
-              <View style={styles.radioItem}>
-                <Pressable
-                  style={styles.radioCircle}
-                  onPress={() => setSelectedDiet("Pescatarian")}
-                >
-                  {selectedDiet === "Pescatarian" && <View style={styles.radioFilled} />}
-                </Pressable>
-                <Text style={styles.radioLabel}>Pescatarian</Text>
-              </View>
+            <Text style={styles.sectionLabel}>Health Goals</Text>
 
-              {/*row 2 */}
-              <View style={styles.radioItem}>
-                <Pressable
-                  style={styles.radioCircle}
-                  onPress={() => setSelectedDiet("Vegetarian")}
-                >
-                  {selectedDiet === "Vegetarian" && <View style={styles.radioFilled} />}
-                </Pressable>
-                <Text style={styles.radioLabel}>Vegetarian</Text>
+            {[
+              [
+                { value: "manageweight", label: "Manage Weight" },
+                { value: "keto", label: "Low Carb / Keto" },
+                { value: "lowfat", label: "Low Fat" },
+              ],
+              [
+                { value: "lowsugar", label: "Low Sugar" },
+                { value: "lowsodium", label: "Low Sodium" },
+                { value: "none", label: "None" },
+              ],
+            ].map((row, index) => (
+              <View key={index} style={styles.chipsRow}>
+                {row.map(({ value, label }) => (
+                  <Pressable
+                    key={value}
+                    style={[
+                      styles.chip,
+                      selectedHealthGoals.includes(value) && styles.chipSelected
+                    ]}
+                    onPress={() => toggleHealthGoal(value)}
+                  >
+                    <Text style={[
+                      styles.chipText,
+                      selectedHealthGoals.includes(value) && styles.chipTextSelected
+                    ]}>
+                      {label}
+                    </Text>
+                  </Pressable>
+                ))}
               </View>
-              <View style={styles.radioItem}>
-                <Pressable
-                  style={styles.radioCircle}
-                  onPress={() => setSelectedDiet("Vegan")}
-                >
-                  {selectedDiet === "Vegan" && <View style={styles.radioFilled} />}
-                </Pressable>
-                <Text style={styles.radioLabel}>Vegan</Text>
-              </View>
-
-              {/*row 3*/}
-              <View style={styles.radioItem}>
-                <Pressable
-                  style={styles.radioCircle}
-                  onPress={() => setSelectedDiet("None")}
-                >
-                  {selectedDiet === "None" && <View style={styles.radioFilled} />}
-                </Pressable>
-                <Text style={styles.radioLabel}>None</Text>
-              </View>
-            </View>
-          </View>
-
-          {/*health goals section - first row*/}
-          <View style={styles.section}>
-            <Text style={styles.sectionLabel}>Health goals</Text>
-            <View style={styles.chipsRow}>
-              {["Manage weight", "Keto", "Low fat"].map((item) => (
-                <Pressable
-                  key={item}
-                  style={[
-                    styles.chip,
-                    selectedGoals.includes(item) && styles.chipSelected
-                  ]}
-                  onPress={() => toggleGoal(item)}
-                >
-                  <Text style={[
-                    styles.chipText,
-                    selectedGoals.includes(item) && styles.chipTextSelected
-                  ]}>{item}</Text>
-                </Pressable>
-              ))}
-            </View>
-            {/* second row*/}
-            <View style={styles.chipsRow}>
-              {["Low sugar", "Low sodium", "None"].map((item) => (
-                <Pressable
-                  key={item}
-                  style={[
-                    styles.chip,
-                    selectedGoals.includes(item) && styles.chipSelected
-                  ]}
-                  onPress={() => toggleGoal(item)}
-                >
-                  <Text style={[
-                    styles.chipText,
-                    selectedGoals.includes(item) && styles.chipTextSelected
-                  ]}>{item}</Text>
-                </Pressable>
-              ))}
-            </View>
+            ))}
           </View>
 
         </ScrollView>
 
-        {/*save button at the bottom */}
-        <Pressable style={styles.saveBtn} onPress={onClose}>
+        {/* Save Button */}
+        <Pressable style={styles.saveBtn} onPress={handleSave}>
           <Text style={styles.saveBtnText}>Save</Text>
         </Pressable>
 
@@ -373,8 +343,9 @@ const styles = StyleSheet.create({
   // save button
   saveBtn: {
     backgroundColor: "#674f5d",
-    paddingVertical: 14,
-    borderRadius: 25,
+    paddingVertical: 9,
+    marginHorizontal:140,
+    borderRadius: 30,
     alignItems: "center",
     marginTop: 15,
   },
