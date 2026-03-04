@@ -17,7 +17,7 @@ services:
       watch:
         - action: sync
           path:
-             ./frontend/SafeBitesReactApp
-          target: /frontend/SafeBitesReactApp
+             ./frontend/SafeBitesReactApp/app/login.tsx
+          target: /frontend/SafeBitesReactApp/app/login.tsx
           ignore:
             - node_modules
