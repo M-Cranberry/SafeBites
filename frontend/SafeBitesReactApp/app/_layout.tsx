@@ -1,7 +1,10 @@
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font"; //ADDED BY CAMI , this lets us load custom fonts
+import { UserPreferencesProvider } from "../context/UserPreferenceContext";
+
 
 export default function RootLayout() {
+
   // ADDED BY CAMI, loads all quicksand fonts from assets/fonts folder and added on 2/5 the bbhh hegarty font
   const [fontsLoaded] = useFonts({
     "Quicksand-Light": require("../assets/fonts/Quicksand-Light.ttf"),
@@ -17,5 +20,9 @@ export default function RootLayout() {
     return null;
   }
 
-  return <Stack />;
+  return (
+    <UserPreferencesProvider>
+      <Stack />
+    </UserPreferencesProvider>
+  );
 }

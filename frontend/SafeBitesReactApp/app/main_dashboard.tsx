@@ -1,166 +1,172 @@
 import { StyleSheet, Text, View, Pressable, Image, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient"; // fixed by cami - added for gradient behind navbar
+import { LinearGradient } from "expo-linear-gradient";
+import { useUserPreferences } from "../context/UserPreferenceContext";
 
 export default function MainDashboard() {
-    const router = useRouter();
-    return (
-        <View style={styles.wrapper}>
-        <ScrollView contentContainerStyle={styles.container}>
+  const router = useRouter();
+  const { preferences } = useUserPreferences();
 
-                {/*header*/}
-                <View style={styles.header}>
-                {/* profile stuff */}
-                <View style={styles.welcomeRow}>
-                    <View style={styles.welcomeName}>
-                    <Text style={styles.welcomeText}>Hi, Jane</Text>
-                    </View>
+const labelMap: Record<string, string> = {
+  manageweight: "Manage Weight",
+  lowfat: "Low Fat",
+  lowsugar: "Low Sugar",
+  lowsodium: "Low Sodium",
+  keto: "Keto",
+  none: "None",
+};
+const formatLabel = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+  return (
+    <View style={styles.wrapper}>
+      <ScrollView contentContainerStyle={styles.container}>
 
-                  <Pressable onPress={() => router.push("/profile")}>
-                    <Image
-                    source={require("../assets/images/profilepic.jpg")}
-                    style={styles.profilepic}
-                    />
-                  </Pressable>
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={styles.welcomeRow}>
+            <View style={styles.welcomeName}>
+              <Text style={styles.welcomeText}>Hi, Jane</Text>
+            </View>
 
-                </View>
-
-                {/*diet*/}
-                <Text style={styles.dietPreferance}>Your Dietary Preferences</Text>
-                <View style={styles.preferenceRow}>
-                    <View style={styles.preferenceBorder}>
-                    <Image source={require("../assets/images/icons/eggfreeicon.png")} style={styles.dietIcon} />
-                    <Text style={styles.dietChoice}>Egg-free</Text>
-                    </View>
-                    <View style={styles.preferenceBorder}>
-                    <Image source={require("../assets/images/icons/pescatarianicon.png")} style={styles.dietIcon} />
-                    <Text style={styles.dietChoice}>Pescatarian</Text>
-                    </View>
-
-                </View>
-                <Text onPress={() => router.push("/dietary_pref")} style={styles.editPreferences}>{'\n'}edit my preferences</Text>
-                </View>
-
-
-
-                {/*top picks-filter*/}
-                <View style={styles.middleContainer}>
-                 <Text style={styles.sectionTitle}>Top picks for you</Text>
-
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={styles.filterRow}>
-
-                  <View style={styles.filterRow}>
-                    {["Nearby", "Most popular", "Low price", "Open now"].map((item) => (
-                    <View key={item} style={styles.filterButton}>
-                        <Text style={styles.filterText}>{item}</Text>
-                    </View>
-                    ))}
-                </View>
-                </ScrollView>
-
-
-
-                  {/*restaurant cards */}
-                  <View style={styles.shadowBox}>
-                    <View style={styles.card}>
-                      {[
-                        {
-                          name: "Chick-Fil-A",
-                          distance: "0.5 mi",
-                          image: require("../assets/images/chickfila.jpg"),
-                          route:"/restaurantprof_chickfila",
-                        },
-                        {
-                          name: "Qdoba Mexican",
-                          distance: "0.7 mi",
-                          image: require("../assets/images/qdoba.jpg"),
-                          route:"/restaurantprof_qdoba",
-                        },
-                        {
-                          name: "Huey Magoos",
-                          distance: "0.7 mi",
-                          image: require("../assets/images/huey.jpg"),
-                          route:"/restaurantprof_huey",
-                        },
-                        /*
-                        {
-                          name: "Panda Express",
-                          distance: "1.1 mi",
-                          image: require("../assets/images/panda.jpg"),
-                          route:"/restaurantprof_panda",
-                        },
-                        {
-                          name: "Dunkin Donuts",
-                          distance: "2 mi",
-                          image: require("../assets/images/dunkin.jpg"),
-                          route:"/restaurantprof_dunkin",
-                        }
-                        */
-                      ].map((item) => (
-                        <Pressable onPress={()=>router.push(item.route as any)}
-                         key={item.name} >
-                          <View style={styles.cardRow}>
-                          <Image source={item.image} style={styles.cardImage} />
-                          <View>
-                            <Text  style={styles.restaurantName}>{item.name}</Text>
-                            <Text style={styles.distance}>{item.distance}</Text>
-                          </View>
-                        </View>
-                        </Pressable>
-
-                      ))}
-                    </View>
-                  </View>
-
-                  <Pressable onPress={()=>router.push("/Discover")} >
-                      <Text style={styles.seeMore}>see more</Text>
-                  </Pressable>
-                
-                </View>
-        </ScrollView>
-
-        {/* fixed by cami - added gradient behind search bar and navbar */}
-        {/* fixed by cami - gradient white, 0% opacity top to 100% opacity bottom, 278px height */}
-        <LinearGradient
-          colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']}
-          style={styles.bottomGradient}
-        >
-          <Pressable onPress={()=>router.push("/keyboard")} style={styles.searchBar}>
-            <Image
-              source={require("../assets/images/search.png")}
-              style={styles.searchIcon}
-            />
-            <Text style={styles.searchText}>Search</Text>
-          </Pressable>
-
-          <View style={styles.navBar}>
-            <Pressable onPress={() => router.push("/main_dashboard")}>
-                <Image
-                source={require("../assets/images/house.png")}
-                style={styles.navIcon}
-                />
-            </Pressable>
-
-            <Pressable onPress={() => router.push("/Discover")}>
-                <Image
-                source={require("../assets/images/compass.png")}
-                style={styles.navIcon}
-                />
-            </Pressable>
-
-            <Pressable onPress={() => router.push("/favorites")}>
-                <Image
-                source={require("../assets/images/heart.png")}
-                style={styles.navIcon}
-                />
+            <Pressable onPress={() => router.push("/profile")}>
+              <Image
+                source={require("../assets/images/profilepic.jpg")}
+                style={styles.profilepic}
+              />
             </Pressable>
           </View>
-        </LinearGradient>
+
+          {/* Dietary Preferences Section */}
+          <Text style={styles.dietPreferance}>Your Dietary Preferences</Text>
+          <View style={styles.preferenceRow}>
+
+            {/* Allergies */}
+            {preferences.allergies?.length > 0 &&
+              preferences.allergies.map((item: string) => (
+                <View key={item} style={styles.preferenceBorder}>
+                  <Text style={styles.dietChoice}>{formatLabel(item)}</Text>
+                </View>
+              ))}
+
+            {/* dietype */}
+            {preferences.dietType?.length > 0 &&
+              preferences.dietType.map((item: string) => (
+                <View key={item} style={styles.preferenceBorder}>
+                  <Text style={styles.dietChoice}>{formatLabel(item)}</Text>
+                </View>
+              ))}
+
+            {/* healthgoals */}
+            {preferences.dietPlan?.length > 0 &&
+              preferences.dietPlan.map((item: string) => (
+                <View key={item} style={styles.preferenceBorder}>
+                  <Text style={styles.dietChoice}>
+                    {labelMap[item] || item}
+                  </Text>
+                </View>
+              ))}
+
+            {/* Empty State */}
+            {(!preferences.allergies?.length &&
+              !preferences.dietType?.length &&
+              !preferences.dietPlan?.length) && (
+              <Text style={styles.dietChoice}>No preferences set</Text>
+            )}
+          </View>
+
+          <Text
+            onPress={() => router.push("/dietary_pref")}
+            style={styles.editPreferences}
+          >
+            {"\n"}edit my preferences
+          </Text>
         </View>
-    )
+
+        {/* Top Picks Filter */}
+        <View style={styles.middleContainer}>
+          <Text style={styles.sectionTitle}>Top picks for you</Text>
+
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.filterRow}
+          >
+            <View style={styles.filterRow}>
+              {["Nearby", "Most popular", "Low price", "Open now"].map((item) => (
+                <View key={item} style={styles.filterButton}>
+                  <Text style={styles.filterText}>{item}</Text>
+                </View>
+              ))}
+            </View>
+          </ScrollView>
+
+          {/* Restaurant Cards */}
+          <View style={styles.shadowBox}>
+            <View style={styles.card}>
+              {[
+                {
+                  name: "Chick-Fil-A",
+                  distance: "0.5 mi",
+                  image: require("../assets/images/chickfila.jpg"),
+                  route: "/restaurantprof_chickfila",
+                },
+                {
+                  name: "Qdoba Mexican",
+                  distance: "0.7 mi",
+                  image: require("../assets/images/qdoba.jpg"),
+                  route: "/restaurantprof_qdoba",
+                },
+                {
+                  name: "Huey Magoos",
+                  distance: "0.7 mi",
+                  image: require("../assets/images/huey.jpg"),
+                  route: "/restaurantprof_huey",
+                },
+              ].map((item) => (
+                <Pressable key={item.name} onPress={() => router.push(item.route as any)}>
+                  <View style={styles.cardRow}>
+                    <Image source={item.image} style={styles.cardImage} />
+                    <View>
+                      <Text style={styles.restaurantName}>{item.name}</Text>
+                      <Text style={styles.distance}>{item.distance}</Text>
+                    </View>
+                  </View>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+
+          <Pressable onPress={() => router.push("/Discover")}>
+            <Text style={styles.seeMore}>see more</Text>
+          </Pressable>
+        </View>
+      </ScrollView>
+
+      {/* Gradient & Navbar */}
+      <LinearGradient
+        colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']}
+        style={styles.bottomGradient}
+      >
+        <Pressable onPress={() => router.push("/keyboard")} style={styles.searchBar}>
+          <Image source={require("../assets/images/search.png")} style={styles.searchIcon} />
+          <Text style={styles.searchText}>Search</Text>
+        </Pressable>
+
+        <View style={styles.navBar}>
+          <Pressable onPress={() => router.push("/main_dashboard")}>
+            <Image source={require("../assets/images/house.png")} style={styles.navIcon} />
+          </Pressable>
+
+          <Pressable onPress={() => router.push("/Discover")}>
+            <Image source={require("../assets/images/compass.png")} style={styles.navIcon} />
+          </Pressable>
+
+          <Pressable onPress={() => router.push("/favorites")}>
+            <Image source={require("../assets/images/heart.png")} style={styles.navIcon} />
+          </Pressable>
+        </View>
+      </LinearGradient>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

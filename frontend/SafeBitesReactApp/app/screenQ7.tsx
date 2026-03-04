@@ -14,15 +14,16 @@ export default function Q1Answers() {
 
         <View style={styles.body}>
           <Text style={styles.header}>Thank You!</Text>
-          <Text style={styles.icon}>
-          <AntDesign name="check-circle" size={60} color="#C5DBCA" /> </Text>
+          <View style={styles.icon}>
+          <AntDesign name="check-circle" size={60} color="#C5DBCA" /> </View>
           <Text style={styles.text}>We will save this information to</Text>
-          <Text style={styles.text}>personalize your dining experience.</Text>
+          <Text style={styles.text}>personalize your dining</Text>
+          <Text style={styles.text}>experience.</Text>
         </View>
 
 
         {/* Next Button */}
-`       <View style={styles.nextButton}>
+       <View style={styles.nextButton}>
           <Pressable onPress={() => router.push('/main_dashboard')}>
             <Text style={[styles.nextButton, styles.nextButtonBorder]}> Go to Main Dashboard </Text>
           </Pressable>
@@ -36,31 +37,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#6AA792",
+    paddingTop:80,
   }, 
     header: {
     color: '#FFFAF0',
     fontFamily: "BBH-Hegarty-Regular",
     fontSize: 36,
     paddingTop: 100,
-    alignItems: "center",
+    textAlign: "center",
   },
   body: {
-    paddingLeft: 20,
     paddingBottom: 20,
-    alignItems: "center",
+    textAlign: "center",
   },
    text: {
-    paddingLeft: 20,
     color: '#FFFAF0',
     fontFamily: "Quicksand-Medium",
     fontSize: 20,
-    alignItems: "center",
+    textAlign: "center"
   },
   //checkmark icon
   icon: {
     paddingTop: 30,
     paddingBottom: 30,
-    paddingLeft: 20,
     alignItems: "center",
   },
   // Button Container
@@ -69,14 +68,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     color: '#FFFAF0',
-    fontSize: 20,
-    padding: 10,
+    fontSize: 18,
+    padding: 8,
+    marginTop: 10,
   },
 
   // Button Colors
   nextButtonBorder: {
-    paddingHorizontal: 40,
-    borderWidth: 2,
+    paddingHorizontal: 35,
+    borderWidth: 1,
     borderColor: '#674F5D',
     borderRadius: 30,
     backgroundColor: '#674F5D',

@@ -1,5 +1,6 @@
 import { router } from "expo-router";
 import { Text, View, Pressable, StyleSheet } from "react-native";
+import { Colors } from "../styles/colors";
 
 
 export default function Index() {
@@ -21,9 +22,9 @@ export default function Index() {
       </View>
 
       {/* Continue Button */}
-      <View style={styles.nextButton}>
+      <View style={styles.nextButtonBorder}>
         <Pressable onPress={() => router.push("/screenQ1")}>
-          <Text style={[styles.nextButton, styles.nextButtonBorder]}>
+          <Text style={[styles.nextButton]}>
             Continue
           </Text>
         </Pressable>
@@ -46,11 +47,11 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 50,
     borderWidth: 1,
-    borderColor: '#C3D8C5',
+    borderColor: Colors.headerColor,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    backgroundColor: '#C3D8C5',
-    color: '#674F5D',
+    backgroundColor: Colors.headerColor,
+    color: Colors.secondaryText,
     fontFamily: 'Quicksand-Medium',
     fontSize: 36,
   },
@@ -60,27 +61,27 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingTop: 40,
     paddingBottom: 40,
-    color: '#FFFAF0',
-    fontSize: 20,
+    color: Colors.thirdText,
+    fontSize: 23,
     fontFamily: 'Quicksand-Medium',
   },
 
   // Button Container
   nextButton: {
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: '#FFFAF0',
+    textAlign: 'center',
+    color: Colors.thirdText,
     fontSize: 20,
-    padding: 15,
+    padding: 10,
   },
 
   // Button Colors
   nextButtonBorder: {
-    borderWidth: 2,
-    borderColor: '#674F5D',
+    borderWidth: 1,
+    borderColor: Colors.purpleShadow,
     borderRadius: 30,
-    backgroundColor: '#674F5D',
+    backgroundColor: Colors.primaryButton,
+    paddingHorizontal:10,
+    marginHorizontal:150,
   },
 });
 
