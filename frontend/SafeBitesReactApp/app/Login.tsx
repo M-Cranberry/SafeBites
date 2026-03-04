@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Pressable, Image, TextInput, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
+import { Colors } from "../styles/colors";
+
 
 export default function Login() {
   const router = useRouter();
@@ -66,7 +68,7 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#FFF8F3",
+    backgroundColor: Colors.primary,
     paddingHorizontal: 24,
     paddingTop: 60,
     justifyContent: "space-between",
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 20,
-    color: "#674f5d",
+    color: Colors.secondaryText,
     fontFamily: "Quicksand-Medium",
     paddingLeft: 7
   },
@@ -96,18 +98,18 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "#FFF8F3",
+    backgroundColor: Colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderRadius: 25,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: "#7d6d73",
-    color: "#7d6d73",
+    borderColor: Colors.purpleBorder,
+    color: Colors.secondaryText,
   },
 
   forgot: {
-    color: "#7d6d73",
+    color: Colors.secondaryText,
     textAlign: "center",
     marginTop: -8,
     marginBottom: 8,
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: "#6aa792",
+    backgroundColor: Colors.secondaryButton,
     paddingVertical: 14,
     borderRadius: 30,
     alignItems: "center",
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    color: "#FFF8F3",
+    color: Colors.thirdText,
     fontSize: 20,
     fontFamily: "Quicksand-Medium",
   },
@@ -140,13 +142,13 @@ const styles = StyleSheet.create({
   },
 
   extraText: {
-    color: "#674f5d",
+    color: Colors.secondaryText,
     fontSize: 14,
     textAlign: "center"
   },
 
   link: {
-    color: "#674f5d",
+    color: Colors.secondaryText,
     fontWeight: "bold",
     textAlign: "center"
   },

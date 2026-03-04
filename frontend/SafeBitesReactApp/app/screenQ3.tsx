@@ -1,11 +1,14 @@
 import { router } from "expo-router";
 import * as React from "react";
 import { Text, View, Pressable, StyleSheet } from "react-native";
+import { layouts, spacing } from "../styles/spacing";
+import { Colors } from "../styles/colors";
+import { useUserPreferences } from "../context/UserPreferenceContext";
 
 /* manages options being added to an array, yes we are going to have to manage strings later*/
 /* Backend phase change variable names*/
 const Option = ({ label, value, selectedValues, toggleValue }) => {
-  const checkedQ3 = selectedValues.includes(value);
+  const checkedQ1 = selectedValues.includes(value);
 
   return (
     <View style={styles.optionContainer}>
@@ -14,10 +17,9 @@ const Option = ({ label, value, selectedValues, toggleValue }) => {
         onPress={() => toggleValue(value)}
         style={[
           styles.checkbox,
-          checkedQ3 && styles.checkboxChecked,
-        ]}
+          checkedQ1 && styles.checkboxChecked]}
       >
-        {checkedQ3 && <View />}
+        {checkedQ1 && <View />}
       </Pressable>
 
       {/* text or something */}
@@ -27,14 +29,31 @@ const Option = ({ label, value, selectedValues, toggleValue }) => {
 };
 
 export default function Q3Answers() {
-  const [selectedValues, setSelectedValues] = React.useState([]);
+  //access context
+  const { preferences, updatePreference } = useUserPreferences();
 
+  // Preload saved selections if they exist
+ const [selectedValues, setSelectedValues] = React.useState([]);
+
+React.useEffect(() => {
+  if (preferences.strictness?.length) {
+    setSelectedValues(preferences.strictness);
+  }
+}, [preferences.strictness]);
+
+  /* manages the checkbox selection values */
   const toggleValue = (item) => {
-    setSelectedValues((prev) =>
-      prev.includes(item)
-        ? prev.filter((v) => v !== item)
-        : [...prev, item]
-    );
+    const updatedValues = selectedValues.includes(item)
+      ? selectedValues.filter((v) => v !== item)
+      : [...selectedValues, item];
+
+    setSelectedValues(updatedValues); 
+   
+  };
+
+  const handleNext = () => {
+    updatePreference("strictness", selectedValues);
+    router.push("/screenQ4");
   };
 
   return (
@@ -44,67 +63,54 @@ export default function Q3Answers() {
           <Text style={styles.header}>
             How strict are you{"\n"}with your diet or{"\n"}restrictions?
           </Text>
-          <Text style={styles.body}>Select all that apply</Text>
+          <Text style={styles.body}>Select one</Text>
         </View>
 
         {/* options */}
         <View style={styles.optionsWrapper}>
-            <Option label="VeryStrict" value="veryStrict" {...{ selectedValues, toggleValue }} />
-            <Option label="GenerallyStrict" value="generallyStrict" {...{ selectedValues, toggleValue }} />
+            <Option label="Very Strict" value="veryStrict" {...{ selectedValues, toggleValue }} />
+            <Option label="Generally Strict" value="generallyStrict" {...{ selectedValues, toggleValue }} />
             <Option label="Flexible" value="flexible" {...{ selectedValues, toggleValue }} />
         </View>
 
         {/* Next Button */}
-`       <View style={styles.nextButton}>
-          <Pressable onPress={() => router.push('/screenQ4')}>
-            <Text style={[styles.nextButton, styles.nextButtonBorder]}>
-              Next
-            </Text>
-          </Pressable>
-        </View>`
+       <Pressable
+        style={[styles.nextButtonBorder, { backgroundColor: Colors.primaryButton }]}
+        onPress={handleNext}
+      >
+        <Text style={styles.nextButton}>Next</Text>
+      </Pressable>
       </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#6AA792",
+       ...layouts.container
   },
 
   // Header 
   header: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 50,
-    borderWidth: 1,
-    borderColor: '#C3D8C5',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    backgroundColor: '#C3D8C5',
-    color: '#674F5D',
+    ...layouts.headerBase,
     fontFamily: "Quicksand-Medium",
     fontSize: 36,
   },
   body: {
-    paddingTop: 15,
-    paddingLeft: 20,
-    paddingBottom: 40,
-    color: '#674F5D',
+    paddingTop: spacing.lg,
+    paddingBottom: spacing.xxxl,
+    ...layouts.body,
     fontSize: 20,
   },
 
   // Two column grid ? 
   optionsWrapper: {
     flexWrap: "wrap",
-    paddingLeft: 20,
-    paddingTop: 16,
+    paddingLeft: 40,
+    paddingTop: 40,
   },
   optionContainer: {
     width: "40%",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 2,
+        ...layouts.optionContainer,
   },
   optionLabel: {
     fontSize: 18,
@@ -114,42 +120,22 @@ const styles = StyleSheet.create({
 
     // Custom checkbox
   checkbox: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: "#FFFAF0",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 10,
+    ...layouts.checkbox,
+    borderColor:Colors.primary,
   },
   checkboxChecked: {
-    backgroundColor: "#C3D8C5",
-    borderColor: "#FFFAF0",
-  },
-
-  optionLabel: {
-    fontSize: 18,
-    color: "#FFFAF0",
-    fontFamily: "Quicksand-Medium",
+    backgroundColor: Colors.headerColor,
+    borderColor: Colors.primary,
   },
 
   // Button Container
   nextButton: {
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: '#FFFAF0',
+    ...layouts.nextButtonText,
+    color: Colors.thirdText,
     fontSize: 20,
-    padding: 10,
   },
 
-  // Button Colors
   nextButtonBorder: {
-    paddingHorizontal: 40,
-    borderWidth: 2,
-    borderColor: '#674F5D',
-    borderRadius: 30,
-    backgroundColor: '#674F5D',
+    ...layouts.nextButtonBorder,
   },
 });

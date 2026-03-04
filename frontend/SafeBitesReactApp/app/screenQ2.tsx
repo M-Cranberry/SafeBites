@@ -1,6 +1,9 @@
 import { router } from "expo-router";
 import * as React from "react";
 import { Text, View, Pressable, StyleSheet } from "react-native";
+import { layouts, spacing } from "../styles/spacing";
+import { Colors } from "../styles/colors";
+import { useUserPreferences } from "../context/UserPreferenceContext";
 
 /* manages options being added to an array, yes we are going to have to manage strings later*/
 /* Backend phase change variable names*/
@@ -12,31 +15,48 @@ const Option = ({ label, value, selectedValues, toggleValue }) => {
       {/* Checkbox button */}
       <Pressable
         onPress={() => toggleValue(value)}
-        style={[
-          styles.checkbox,
-          checkedQ2 && styles.checkboxChecked,
-        ]}
+        style={[styles.checkbox, 
+        checkedQ2 && styles.checkboxChecked]}
       >
         {checkedQ2 && <View />}
       </Pressable>
 
-      {/* text or something */}
+      {/*text */}
       <Text style={styles.optionLabel}>{label}</Text>
     </View>
   );
 };
 
-export default function Q2Answers() {
-  const [selectedValues, setSelectedValues] = React.useState([]);
 
+export default function Q2Answers() {
+  //access context
+  const { preferences, updatePreference } = useUserPreferences();
+
+  //loads previously saved selections, if any
+ const [selectedValues, setSelectedValues] = React.useState([]);
+ 
+ React.useEffect(() => {
+   if (preferences.dietType?.length) {
+     setSelectedValues(preferences.dietType);
+   }
+ }, [preferences.dietType]);
+  /*manages the checkbox selection values */
   const toggleValue = (item) => {
-    setSelectedValues((prev) =>
-      prev.includes(item)
-        ? prev.filter((v) => v !== item)
-        : [...prev, item]
-    );
+    const updatedValues = selectedValues.includes(item)
+      ? selectedValues.filter((v) => v !== item)
+      : [...selectedValues, item];
+
+    setSelectedValues(updatedValues)
+    
   };
 
+  //called when user hits next button to save and move on
+  const handleNext = () => {
+    updatePreference("dietType", selectedValues);
+    router.push("/screenQ3");
+  };
+
+  
   return (
       <View style={styles.container}>
 
@@ -57,56 +77,43 @@ export default function Q2Answers() {
         </View>
 
         {/* Next Button */}
-`       <View style={styles.nextButton}>
-          <Pressable onPress={() => router.push('/screenQ3')}>
-            <Text style={[styles.nextButton, styles.nextButtonBorder]}>
-              Next
-            </Text>
-          </Pressable>
-        </View>`
+       <Pressable
+        style={[styles.nextButtonBorder, { backgroundColor: Colors.primaryButton }]}
+        onPress={handleNext}
+      >
+        <Text style={styles.nextButton}>Next</Text>
+      </Pressable>
       </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#6AA792",
+    ...layouts.container
   },
 
   // Header 
   header: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 50,
-    borderWidth: 1,
-    borderColor: '#C3D8C5',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    backgroundColor: '#C3D8C5',
-    color: '#674F5D',
+     ...layouts.headerBase,
     fontFamily: "Quicksand-Medium",
     fontSize: 36,
   },
   body: {
-    paddingTop: 15,
-    paddingLeft: 20,
-    paddingBottom: 40,
-    color: '#674F5D',
+    paddingTop: spacing.md,
+    paddingBottom: spacing.xxl,
+    ...layouts.body,
     fontSize: 20,
   },
 
   // Two column grid ? 
   optionsWrapper: {
     flexWrap: "wrap",
-    paddingLeft: 20,
-    paddingTop: 16,
+    paddingLeft:spacing.xxxl,
+    paddingTop: spacing.lg,
   },
   optionContainer: {
     width: "40%",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 2,
+   ...layouts.optionContainer,
   },
   optionLabel: {
     fontSize: 18,
@@ -116,42 +123,22 @@ const styles = StyleSheet.create({
 
     // Custom checkbox
   checkbox: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: "#FFFAF0",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 10,
+    ...layouts.checkbox,
+    borderColor:Colors.primary,
   },
   checkboxChecked: {
-    backgroundColor: "#C3D8C5",
-    borderColor: "#FFFAF0",
-  },
-
-  optionLabel: {
-    fontSize: 18,
-    color: "#FFFAF0",
-    fontFamily: "Quicksand-Medium",
+    backgroundColor: Colors.headerColor,
+    borderColor: Colors.primary,
   },
 
   // Button Container
   nextButton: {
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: '#FFFAF0',
+    ...layouts.nextButtonText,
+    color: Colors.thirdText,
     fontSize: 20,
-    padding: 10,
   },
 
-  // Button Colors
   nextButtonBorder: {
-    paddingHorizontal: 40,
-    borderWidth: 2,
-    borderColor: '#674F5D',
-    borderRadius: 30,
-    backgroundColor: '#674F5D',
+   ...layouts.nextButtonBorder,
   },
 });

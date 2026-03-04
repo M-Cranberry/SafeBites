@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Pressable, Image, TextInput, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
+import { Colors } from "../styles/colors";
+
 
 export default function SignUp() {
   const router = useRouter();
@@ -82,7 +84,7 @@ export default function SignUp() {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#FFF8F3",
+    backgroundColor: Colors.primary,
     paddingHorizontal: 24,
     paddingTop: 60,
     justifyContent: "space-between",
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 23,
-    color: "#674f5d",
+    color: Colors.secondaryText,
     fontFamily: "Quicksand-Medium",
     paddingLeft: 7
   },
@@ -118,17 +120,17 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "#FFF8F3",
+    backgroundColor: Colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderRadius: 25,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: "#674f5d",
+    borderColor: Colors.purpleBorder,
   },
 
   button: {
-    backgroundColor: "#6aa792",
+    backgroundColor: Colors.secondaryButton,
     paddingVertical: 8,
     borderRadius: 30,
     alignItems: "center",
@@ -149,13 +151,13 @@ const styles = StyleSheet.create({
   },
 
   extraText: {
-    color: "#7d6d73",
+    color: Colors.secondaryText,
     fontSize: 16,
     textAlign: "center"
   },
 
   link: {
-    color: "#674f5d",
+    color: Colors.secondaryText,
     fontWeight: "bold",
     textAlign: "center"
   },

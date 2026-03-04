@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Pressable, Image } from "react-native";
 import { useRouter } from "expo-router";
+import { Colors } from "../styles/colors";
 
 export default function Page() {
   const router = useRouter();
@@ -34,10 +35,11 @@ export default function Page() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF8F3", 
+    backgroundColor: Colors.primary, 
   },
 
   top: {
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
 
   welcome: {
     fontSize: 36,
-    color: "#6aa792",
+    color: Colors.headerText,
     fontFamily: "BBHHegarty-Regular",
   },
 
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop:20,
     paddingTop: 10,
-    backgroundColor: "#6aa792",
+    backgroundColor: Colors.secondaryButton,
     paddingVertical: 14,
     borderRadius: 30,
     alignItems: "center",
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
 
   buttonText: {
     fontSize: 20,
-    color: "#FFF8F3",
+    color: Colors.thirdText,
     fontFamily: "Quicksand-Regular",
   },
 });
