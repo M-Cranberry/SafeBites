@@ -18,7 +18,7 @@ const labelMap: Record<string, string> = {
 const formatLabel = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
   return (
     <View style={styles.wrapper}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
 
         {/* Header */}
         <View style={styles.header}>
@@ -29,7 +29,7 @@ const formatLabel = (text: string) => text.charAt(0).toUpperCase() + text.slice(
 
             <Pressable onPress={() => router.push("/profile")}>
               <Image
-                source={require("../assets/images/profilepic.jpg")}
+                source={require("../assets/images/accSettingsPhoto.png")}
                 style={styles.profilepic}
               />
             </Pressable>
@@ -101,7 +101,9 @@ const formatLabel = (text: string) => text.charAt(0).toUpperCase() + text.slice(
 
           {/* Restaurant Cards */}
           <View style={styles.shadowBox}>
-            <View style={styles.card}>
+            
+              <View style={styles.card}>
+                <ScrollView>
               {[
                 {
                   name: "Chick-Fil-A",
@@ -121,6 +123,11 @@ const formatLabel = (text: string) => text.charAt(0).toUpperCase() + text.slice(
                   image: require("../assets/images/huey.jpg"),
                   route: "/restaurantprof_huey",
                 },
+                {
+                  name: "Panda Express",
+                  distance: "1.1 mi",
+                  image: require("../assets/images/panda.jpeg"),
+                  route: "/restaurantprof_panda",}
               ].map((item) => (
                 <Pressable key={item.name} onPress={() => router.push(item.route as any)}>
                   <View style={styles.cardRow}>
@@ -132,19 +139,21 @@ const formatLabel = (text: string) => text.charAt(0).toUpperCase() + text.slice(
                   </View>
                 </Pressable>
               ))}
+              </ScrollView>
             </View>
           </View>
-
-          <Pressable onPress={() => router.push("/Discover")}>
+           
+        </View>
+        <Pressable onPress={() => router.push("/Discover")}>
             <Text style={styles.seeMore}>see more</Text>
           </Pressable>
-        </View>
-      </ScrollView>
-
+      </View>
+          
       {/* Gradient & Navbar */}
       <LinearGradient
         colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']}
         style={styles.bottomGradient}
+         pointerEvents="box-none"
       >
         <Pressable onPress={() => router.push("/keyboard")} style={styles.searchBar}>
           <Image source={require("../assets/images/search.png")} style={styles.searchIcon} />
@@ -175,7 +184,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF8F3",
   },
   container: {
-    flexGrow: 1,
+    flex: 1,
     paddingBottom: 80,
     backgroundColor: "#FFF8F3",
     flexDirection:"column",
@@ -273,7 +282,7 @@ welcomeRow: {
   },
 
   middleContainer:{
-
+    
   },
   /* Top Picks */
   sectionTitle: {
@@ -317,16 +326,18 @@ welcomeRow: {
     padding: 12,
     borderWidth: 1.5,
     borderColor: "#427263",
+    marginBottom:140,
     marginHorizontal: 16,
-    marginBottom: 12,
     shadowOpacity:1,
     shadowOffset: {
       width:10,height:10,
     },
     shadowColor:"#A4C4B0",
     shadowRadius: 0,
+    height:250,
   },
   shadowBox:{
+    
   },
 
   cardRow: {
@@ -361,9 +372,9 @@ cardImage: {
     fontSize: 15,
     color: "#427263",
     textAlign: "center",
-    marginBottom: 30,
-    paddingTop: 9,
     fontFamily: "Quicksand-Medium",
+    marginTop:-110,
+    zIndex:100,
   },
 
   // fixed by cami - searchBar inside gradient, removed position absolute

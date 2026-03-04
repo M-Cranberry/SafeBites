@@ -201,7 +201,7 @@ header: {
     fontSize: 36,
     color: "#6aa792",
     paddingBottom: 10,
-    fontFamily: "BBH Sans Hegarty",
+    fontFamily: "BBHHegarty-Regular",
     fontWeight: "regular",
   },
 
