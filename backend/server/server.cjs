@@ -24,7 +24,7 @@ app.use(express.json());
 
 let db;
 
-// connect once when the server starts
+
 connectToDatabase()
     .then((database) => {
         db = database;
@@ -41,8 +41,7 @@ app.get('/', (req, res) => {
     res.send('SafeBites backend is running');
 });
 
-// SIGN UP
-// creates a user account and stores all screening preferences
+
 app.post('/api/signup', async (req, res) => {
     try {
         if (!db) {
@@ -99,8 +98,7 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 
-// LOGIN
-// checks if the user exists and if password matches
+
 app.post('/api/login', async (req, res) => {
     try {
         if (!db) {
@@ -141,8 +139,7 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// UPDATE PREFERENCES
-// updates saved preferences when user changes them later
+
 app.put('/api/preferences/:userId', async (req, res) => {
     try {
         if (!db) {
@@ -189,8 +186,7 @@ app.put('/api/preferences/:userId', async (req, res) => {
     }
 });
 
-// OPTIONAL REVIEW ROUTE
-// keeping this simple since your team mentioned reviews need to be tied to users
+
 app.post('/api/reviews', async (req, res) => {
     try {
         if (!db) {
