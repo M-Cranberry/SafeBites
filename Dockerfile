@@ -4,6 +4,6 @@ COPY ./frontend/SafeBitesReactApp /frontend/SafeBitesReactApp
 RUN rm -rf /frontend/SafeBitesReactApp/node_modules
 
 WORKDIR /frontend/SafeBitesReactApp
-RUN npx ci
+RUN npm install
 
 CMD ["npx", "expo", "start"]
