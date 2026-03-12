@@ -17,7 +17,7 @@ const client = new MongoClient(connectionString, {
   }
 });
 
-async function run() {
+async function connectToDatabase() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
@@ -26,7 +26,8 @@ async function run() {
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    //await client.close();
   }
 }
-run().catch(console.dir);
+connectToDatabase().catch(console.dir);
+module.exports = { connectToDatabase };

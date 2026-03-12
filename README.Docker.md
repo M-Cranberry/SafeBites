@@ -1,6 +1,9 @@
 ### Building and running your application
-File pointer?
+File pointer
 ./frontend/SafeBitesReactApp/app/login.tsx
+
+Must add provided database login from project doc submission to this file
+./backend/server/configA.env
 
 When you're ready, start your application by running:
 `docker compose up --build`.
