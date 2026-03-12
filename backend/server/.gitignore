@@ -1,1 +1,2 @@
-backend/server/configA.env
+configA.env
+node_modules
